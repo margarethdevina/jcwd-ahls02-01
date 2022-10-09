@@ -1,14 +1,12 @@
 import Axios from "axios";
 import React from "react";
-import Register from "../../Assets/DevImage/Register.png";
-import logo from "../../Assets/DevImage/LogoMedhika.png";
 import { API_URL } from "../../helper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { loginAction } from "../../Redux/Actions/userActions";
-import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { useToastHook } from "../CustomToast";
-import { Flex, Box, Heading, Spinner, Input, Image, Text, Divider, Spacer, ButtonGroup, Button, Link, extendTheme, InputGroup, InputLeftElement,
+import { Spinner, Input, Text, Button, Link, InputGroup, 
   InputRightElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel} from '@chakra-ui/react';
 
 function ModalLogin(props) {
@@ -42,7 +40,7 @@ function ModalLogin(props) {
         setLoadingStat(false);
       } else {
         if(inForm.email.includes("@")){
-          console.log("inForm emails", inForm.email)
+          // console.log("inForm emails", inForm.email)
           let res = await Axios.post(`${API_URL}/users/login`, {
             email: inForm.email,
             password: inForm.password
@@ -88,8 +86,7 @@ function ModalLogin(props) {
     }
   }
 
-
-  console.log(inForm.email, inForm.password)
+  // console.log(inForm.email, inForm.password)
   return (
     <>
       <Modal

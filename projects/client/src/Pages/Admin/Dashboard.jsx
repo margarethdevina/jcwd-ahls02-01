@@ -130,7 +130,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PROFIT HARI INI", res.data)
+        // console.log("RES DATA GET PROFIT HARI INI", res.data)
         setProfitHariIni(res.data)
       }
     } catch (error) {
@@ -148,7 +148,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PENJUALAN HARI INI", res.data)
+        // console.log("RES DATA GET PENJUALAN HARI INI", res.data)
         setPenjualanHariIni(res.data)
       }
     } catch (error) {
@@ -166,7 +166,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET MENUNGGU PEMBAYARAN", res.data)
+        // console.log("RES DATA GET MENUNGGU PEMBAYARAN", res.data)
         setMenungguPembayaran(res.data)
       }
     } catch (error) {
@@ -184,7 +184,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET Konfirmasi PEMBAYARAN", res.data)
+        // console.log("RES DATA GET Konfirmasi PEMBAYARAN", res.data)
         setKonfirmasiPembayaran(res.data)
       }
     } catch (error) {
@@ -202,7 +202,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET SedangProses", res.data)
+        // console.log("RES DATA GET SedangProses", res.data)
         setSedangProses(res.data)
       }
     } catch (error) {
@@ -220,7 +220,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET SedangDikirim", res.data)
+        // console.log("RES DATA GET SedangDikirim", res.data)
         setSedangDikirim(res.data)
       }
     } catch (error) {
@@ -238,7 +238,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PesananTerkonfirmasi", res.data)
+        // console.log("RES DATA GET PesananTerkonfirmasi", res.data)
         setPesananTerkonfirmasi(res.data)
       }
     } catch (error) {
@@ -256,7 +256,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PesananDibatalkan", res.data)
+        // console.log("RES DATA GET PesananDibatalkan", res.data)
         setPesananDibatalkan(res.data)
       }
     } catch (error) {
@@ -274,7 +274,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET StockAkanHabis", res.data)
+        // console.log("RES DATA GET StockAkanHabis", res.data)
         setStockAkanHabis(res.data)
       }
     } catch (error) {
@@ -292,7 +292,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PROFIT MINGGUANNN", res.data)
+        // console.log("RES DATA GET PROFIT MINGGUANNN", res.data)
         setProfitMingguan(res.data)
       }
     } catch (error) {
@@ -311,7 +311,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PenjualanObat MINGGUANNN", res.data)
+        // console.log("RES DATA GET PenjualanObat MINGGUANNN", res.data)
         setPenjualanObatMingguan(res.data.penjualanObatHarian)
         setPenjualanObatRacikMingguan(res.data.penjualanObatRacikHarian)
       }
@@ -320,7 +320,7 @@ const Dashboard=(props)=>{
     }
   }
 
-  console.log("PROFIT BULANAN", profitBulanan)
+  // console.log("PROFIT BULANAN", profitBulanan)
   const getProfitBulanan = async() => {
     try {
       let token = localStorage.getItem("tokenIdUser");
@@ -330,7 +330,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PROFIT BULANANN", res.data)
+        // console.log("RES DATA GET PROFIT BULANANN", res.data)
         setProfitBulanan(res.data)
       }
     } catch (error) {
@@ -338,8 +338,8 @@ const Dashboard=(props)=>{
     }
   }
 
-  console.log("PenjualanObat BULANAN", penjualanObatBulanan)
-  console.log("PenjualanObatRacik BULANAN", penjualanObatRacikBulanan)
+  // console.log("PenjualanObat BULANAN", penjualanObatBulanan)
+  // console.log("PenjualanObatRacik BULANAN", penjualanObatRacikBulanan)
   const getPenjualanObatBulanan = async() => {
     try {
       let token = localStorage.getItem("tokenIdUser");
@@ -349,7 +349,7 @@ const Dashboard=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET PenjualanObat BULANANN", res.data)
+        // console.log("RES DATA GET PenjualanObat BULANANN", res.data)
         setPenjualanObatBulanan(res.data.penjualanObatMingguan)
         setPenjualanObatRacikBulanan(res.data.penjualanObatRacikMingguan)
       }
@@ -615,7 +615,6 @@ const Dashboard=(props)=>{
                             <Text class="h4b">{sedangProses.length}</Text> 
                           </Box>
                         }
-                        {/* <Text class="text-muted">Data dinyatakan dalam puluhan ribu rupiah</Text> */}
                       </div>
                     </div>
                     <div class="col-md-4">

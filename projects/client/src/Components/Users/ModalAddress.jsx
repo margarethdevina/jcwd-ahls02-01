@@ -1,18 +1,15 @@
 import Axios from "axios";
 import React from "react";
-import Register from "../../Assets/DevImage/Register.png";
-import logo from "../../Assets/DevImage/LogoMedhika.png";
 import { API_URL } from "../../helper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAction } from "../../Redux/Actions/userActions";
 import { getAddressActions } from "../../Redux/Actions/addressActions";
-import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { useToastHook } from "../CustomToast";
-import { Flex, Box, Heading, Input, Image, Text, Divider, Spacer, ButtonGroup, Button, Link, extendTheme, InputGroup, InputLeftElement, 
-  InputRightElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, Checkbox,
+import { Flex, Input, Text, Divider, Spacer, ButtonGroup, Button,  
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, FormControl, FormLabel, Checkbox,
   Textarea, Select} from '@chakra-ui/react';
-import { getProvinceRajaOngkir, getProvinceActions2 } from "../../Redux/Actions/getProvinceActions";
+import { getProvinceActions2 } from "../../Redux/Actions/getProvinceActions";
 import { getCityRajaOngkir, getCityActions2 } from "../../Redux/Actions/getCityActions";
 
 function ModalAddress(props) {
@@ -25,7 +22,6 @@ function ModalAddress(props) {
   const toast = useToast()
   const [currentToast, newToast]=useToastHook();
   const [editKota, setEditKota]=React.useState("")
-  // const [postalCodeOn, setPostalCodeOn]=React.useState(false)
   const [editKotaId, setEditKotaId]=React.useState(0)
   const [editProvinsiId, setEditProvinsiId]=React.useState(0)
   const [loadingStat, setLoadingStat]=React.useState(false);
@@ -56,23 +52,22 @@ function ModalAddress(props) {
     setInForm({ ...inForm, [property]: value})
   }
 
-  console.log("address reducer", address, props.data)
+  // console.log("address reducer", address, props.data)
 
   const getProvinceRajaOngkir2 = async() => {
     try {
-      console.log("PROVINCE_ID ACTIONS 2", editProvinsiId)
-      // let token = localStorage.getItem("tokenIdUser");
+      // console.log("PROVINCE_ID ACTIONS 2", editProvinsiId)
       // console.log("TOKENN PROVINCE 2 RAJAONGKIR", token)
       // memeriksa adanya token
       if (editProvinsiId > 0) {
-        console.log("PROVINCE2 JALANNN")
+        // console.log("PROVINCE2 JALANNN")
         let res = await Axios.get(`${API_URL}/rajaOngkir/getProvince2`, {
           headers: {
             provinceid: editProvinsiId
           }
         })
         if (res.data) {
-          console.log("RES DATA GET PROVINCE EDIT RAJAONGKIR", res.data.namaProvinsi[0])
+          // console.log("RES DATA GET PROVINCE EDIT RAJAONGKIR", res.data.namaProvinsi[0])
           dispatch(getProvinceActions2(res.data.namaProvinsi[0]))
         }
       }
@@ -81,23 +76,17 @@ function ModalAddress(props) {
     }
   }
 
-  // const handleProvince = () =>{
-  //   setEditOn(!editOn);
-  //   setEditProvinsiId(e.target.value);
-  // }
   const handleCity = async(e) => {
     try {
-      console.log("====addProvinsiId func", editProvinsiId)
+      // console.log("====addProvinsiId func", editProvinsiId)
       if (editProvinsiId > 0){
         let a = editProvinsiId
-        // let b = !getCityOn
         let city = getCityRajaOngkir(a)
         dispatch(city)
         if (getCity){
           setEditKotaId(e.target.value)
           {getProvinceRajaOngkir2()}
         }
-        // setGetCityOn(!getCityOn)
       } else {
         // alert("else")
       }
@@ -108,10 +97,8 @@ function ModalAddress(props) {
 
   const handleCityName = async(e) => {
     try {
-      console.log("====addProvinsiId func", editKotaId)
-      // setPostalCodeOn(!postalCodeOn)
+      // console.log("====addProvinsiId func", editKotaId)
       if (editKotaId > 0){
-        // setPostalCodeOn(!postalCodeOn)
         {getCityRajaOngkir2()}
       } else {
         // alert("else")
@@ -123,9 +110,9 @@ function ModalAddress(props) {
 
   const getCityRajaOngkir2 = async() => {
     try {
-      console.log("CITY_ID ACTIONS 2", editKotaId)
+      // console.log("CITY_ID ACTIONS 2", editKotaId)
       if (editKotaId > 0) {
-        console.log("CITY2 JALANNN")
+        // console.log("CITY2 JALANNN")
         let res = await Axios.get(`${API_URL}/rajaOngkir/getCity2`, {
           headers: {
             provinceid: editProvinsiId,
@@ -133,7 +120,7 @@ function ModalAddress(props) {
           }
         })
         if (res.data) {
-          console.log("RES DATA GET CITY EDIT RAJAONGKIR", res.data.namaKota[0])
+          // console.log("RES DATA GET CITY EDIT RAJAONGKIR", res.data.namaKota[0])
           dispatch(getCityActions2(res.data.namaKota[0]))
         }
       }
@@ -157,10 +144,8 @@ function ModalAddress(props) {
       })
       if (res.data){
         dispatch(getAddressActions(res.data))
-        // dispatch(loginAction(res.data))
           newToast({
             title: 'Delete Alamat Berhasil.',
-            // description: 'Data pada profile anda sudah terupdate.',
             status: 'success',
           })
         setLoadingStat(false)
@@ -170,13 +155,12 @@ function ModalAddress(props) {
     }
   }
 
-    // console.log("EDIT ONN", postalCodeOn)
-    console.log("getProvince2 & getCity2", getProvince2, getCity2)
+    // console.log("getProvince2 & getCity2", getProvince2, getCity2)
   const handleEditAddress=async()=>{
     try {
       setLoadingStat(true)
       if(editAddress == true){
-        console.log("handleEditAddress Jalannn")
+        // console.log("handleEditAddress Jalannn")
         let token = localStorage.getItem("tokenIdUser");
         let res = await Axios.patch(`${API_URL}/address/editAddress`, {
           idAddress: props.data,
@@ -187,7 +171,6 @@ function ModalAddress(props) {
           city: getCity2,
           cityid: editKotaId,
           postalCode: editKodePos,
-          // editPostalCode: postalCodeOn,
           receiverName: editPenerima,
           receiverPhone: editTelfon,
           isDefaultAddress: editUtama
@@ -197,8 +180,7 @@ function ModalAddress(props) {
           }
         })
         if (res.data) {
-          console.log("RES DATA EDIT PROFILE", res.data)
-          // localStorage.setItem("tokenIdUser", res.data.token)
+          // console.log("RES DATA EDIT PROFILE", res.data)
           dispatch(getAddressActions(res.data))
           newToast({
             title: 'Edit Alamat Berhasil.',
@@ -280,7 +262,6 @@ function ModalAddress(props) {
   const handleCancelEdit =()=>{
     setEditAddress(!editAddress)
     setEditUtama(false)
-    // setPostalCodeOn(false)
     setEditLabel("")
     setEditPenerima("")
     setEditTelfon("")
@@ -444,9 +425,7 @@ function ModalAddress(props) {
   }
 
 
-  console.log('editAddress ==>', editLabel, editPenerima, editTelfon, editAlamat, getProvince2, editProvinsiId, getCity2, editKotaId, editKodePos, editUtama)
-  // console.log('address modalAddress', address)
-  // console.log('props.data', props.utama)
+  // console.log('editAddress ==>', editLabel, editPenerima, editTelfon, editAlamat, getProvince2, editProvinsiId, getCity2, editKotaId, editKodePos, editUtama)
   return (
     <>
       <Modal

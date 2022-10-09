@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AccorAddressComponent from "../../Components/Users/AccorAddress";
 import NavbarComponent from "../../Components/Users/Navbar";
-import TransactionList from "./TransactionList";
 import { useToastHook } from "../../Components/CustomToast";
-import { API_URL, BE_URL } from "../../helper";
-import { getAddress, getAddressActions } from "../../Redux/Actions/addressActions";
-import { getProvinceRajaOngkir, getProvinceActions2 } from "../../Redux/Actions/getProvinceActions";
-import { getCityRajaOngkir, getCityActions2 } from "../../Redux/Actions/getCityActions";
-import { getCostRajaOngkir, getCostActions2 } from "../../Redux/Actions/getCostActions";
+import { API_URL } from "../../helper";
+import { getAddress } from "../../Redux/Actions/addressActions";
+import { getProvinceRajaOngkir } from "../../Redux/Actions/getProvinceActions";
+import { getCostActions2 } from "../../Redux/Actions/getCostActions";
 import { getTransactionAction } from "../../Redux/Actions/transactionActions";
 import {
     Box,
@@ -39,9 +37,6 @@ import { MdDeliveryDining } from "react-icons/md";
 
 const UploadResepPage = (props) => {
 
-    // * untuk warnain dan atur size icon kembali ke keranjang saat di mobile phone display
-    let iconStyles = { color: "var(--colorSix)", fontSize: "1.5em" };
-
     // * media query
     const [isSmallScreen] = useMediaQuery("(max-width: 768px)");
 
@@ -49,111 +44,11 @@ const UploadResepPage = (props) => {
     const [currentToast, newToast] = useToastHook();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const { state, search } = useLocation();
 
     //^ check state
     // console.log(`checkout pg-state dari page cart ${state}`);
 
     //^ STATE MANAGEMENT
-    //TODO ❗❗❗ axios rajaongkir untuk ambil delivery method dan ongkirnya berdasarkan alamat pengiriman yang dipilih
-    // const [deliveryMethod, setDeliveryMethod] = useState({
-    //     "jne": [
-    //         {
-    //             "service": "OKE",
-    //             "description": "Ongkos Kirim Ekonomis",
-    //             "cost": [
-    //                 {
-    //                     "value": 10000,
-    //                     "etd": "2-3",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             "service": "REG",
-    //             "description": "Layanan Reguler",
-    //             "cost": [
-    //                 {
-    //                     "value": 11000,
-    //                     "etd": "1-2",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             "service": "YES",
-    //             "description": "Yakin Esok Sampai",
-    //             "cost": [
-    //                 {
-    //                     "value": 24000,
-    //                     "etd": "1-1",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         }
-    //     ],
-    //     "pos": [
-    //         {
-    //             "service": "Pos Reguler",
-    //             "description": "Pos Reguler",
-    //             "cost": [
-    //                 {
-    //                     "value": 11000,
-    //                     "etd": "2 HARI",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             "service": "Pos Nextday",
-    //             "description": "Pos Nextday",
-    //             "cost": [
-    //                 {
-    //                     "value": 24000,
-    //                     "etd": "1 HARI",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         }
-    //     ],
-    //     "tiki": [
-    //         {
-    //             "service": "ECO",
-    //             "description": "Economy Service",
-    //             "cost": [
-    //                 {
-    //                     "value": 12000,
-    //                     "etd": "4",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             "service": "REG",
-    //             "description": "Regular Service",
-    //             "cost": [
-    //                 {
-    //                     "value": 14000,
-    //                     "etd": "3",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             "service": "ONS",
-    //             "description": "Over Night Service",
-    //             "cost": [
-    //                 {
-    //                     "value": 28000,
-    //                     "etd": "1",
-    //                     "note": ""
-    //                 }
-    //             ]
-    //         }
-    //     ]
-    // })
-
-    // const [subTotalAllCartItems, setSubTotalAllCartItems] = useState(0);
     const [idAddressForOngkir, setIdAddressForOngkir] = useState(null);
     const [addressForOngkir, setAddressForOngkir] = useState("");
     const [idProvinceForOngkir, setIdProvinceForOngkir] = useState(null);
@@ -173,17 +68,6 @@ const UploadResepPage = (props) => {
     const [newImageResep, setNewImageResep] = useState(null);
     const inputIdImageRecipe = useRef(null);
 
-    // const { getCost, getCost2 } = useSelector( (state) => {
-    //     if (idCityForOngkir > 0) {
-    //         return {
-    //             getCost: state.getCostReducers.getCost
-    //         }
-    //     } else if (idCityForOngkir > 0 && getCost.length > 0) {
-    //         return {
-    //             getCost2: state.getCostReducers.getCost2
-    //         }
-    //     }
-    // })
     const { getCost, getCost2 } = useSelector((state) => {
         return {
             getCost: state.getCostReducers.getCost,
@@ -192,8 +76,8 @@ const UploadResepPage = (props) => {
     })
 
     //^ check isi databaseCart
-    console.log(`isi state getCost`, getCost);
-    console.log(`isi state getCost2`, getCost2);
+    // console.log(`isi state getCost`, getCost);
+    // console.log(`isi state getCost2`, getCost2);
 
     // & component did mount
     useEffect(() => {
@@ -220,17 +104,17 @@ const UploadResepPage = (props) => {
 
     const getCostRajaOngkir2 = async () => {
         try {
-            console.log(`idCityForOngkir`, idCityForOngkir);
+            // console.log(`idCityForOngkir`, idCityForOngkir);
 
             if (idCityForOngkir > 0) {
-                console.log(`getCostRajaOngkir 2 jalan`)
+                // console.log(`getCostRajaOngkir 2 jalan`)
                 let res = await Axios.get(`${API_URL}/rajaOngkir/getCost2`, {
                     headers: {
                         kota: idCityForOngkir
                     }
                 })
                 if (res.data) {
-                    console.log(`RES DATA GETCOST2 RAJA ONGKIR`, res.data.dataOngkir);
+                    // console.log(`RES DATA GETCOST2 RAJA ONGKIR`, res.data.dataOngkir);
                     dispatch(getCostActions2(res.data.dataOngkir));
                 }
             }
@@ -286,20 +170,20 @@ const UploadResepPage = (props) => {
                     status: 'warning'
                 })
             } else if (idAddressForOngkir) {
-                console.log(`DARI ACCORDION idAddress ${idAddressForOngkir}, address ${addressForOngkir}, idProvince ${idProvinceForOngkir}, idCity ${idCityForOngkir}, receiverName ${receiverNameForOngkir}, receiverPhone ${receiverPhoneForOngkir}, label ${labelForOngkir}`);
+                // console.log(`DARI ACCORDION idAddress ${idAddressForOngkir}, address ${addressForOngkir}, idProvince ${idProvinceForOngkir}, idCity ${idCityForOngkir}, receiverName ${receiverNameForOngkir}, receiverPhone ${receiverPhoneForOngkir}, label ${labelForOngkir}`);
 
                 setIsTambahAlamat(0);
                 setIsModalAddressOpen(false);
 
                 if (idCityForOngkir) {
-                    console.log(`ada idCityForOngkir nya untuk dioper ke getCost2`);
+                    // console.log(`ada idCityForOngkir nya untuk dioper ke getCost2`);
                     let res = await Axios.get(`${API_URL}/rajaOngkir/getCost2`, {
                         headers: {
                             kota: idCityForOngkir
                         }
                     })
                     if (res.data) {
-                        console.log(`RES DATA GETCOST2 RAJAONGKIR`, res.data);
+                        // console.log(`RES DATA GETCOST2 RAJAONGKIR`, res.data);
                         dispatch(getCostActions2(res.data));
                     }
                 } else {
@@ -307,7 +191,7 @@ const UploadResepPage = (props) => {
                 }
 
             } else {
-                console.log(`idAddressForOngkir`, idAddressForOngkir)
+                // console.log(`idAddressForOngkir`, idAddressForOngkir)
                 newToast({
                     title: `Alamat Belum Terpilih`,
                     description: "Pilih dahulu alamat yang ingin dituju",
@@ -353,10 +237,10 @@ const UploadResepPage = (props) => {
     // & printList metode pengririman berdasarkan onChange radio button
     const printDelivery = (radioDelivery) => {
         if (getCost != undefined) {
-            console.log(`isi getCost di printDelivery`, getCost);
-            console.log(`isi getCost2 di printDelivery`, getCost2);
+            // console.log(`isi getCost di printDelivery`, getCost);
+            // console.log(`isi getCost2 di printDelivery`, getCost2);
             let arrayDelivery = getCost[radioDelivery];
-            console.log(`isi arrayDelivery`, arrayDelivery);
+            // console.log(`isi arrayDelivery`, arrayDelivery);
 
             if (arrayDelivery != undefined) {
 
@@ -386,9 +270,9 @@ const UploadResepPage = (props) => {
             }
         } else if (getCost2 != undefined) {
 
-            console.log(`isi getCost2 di printDelivery`, getCost2);
+            // console.log(`isi getCost2 di printDelivery`, getCost2);
             let arrayDelivery = getCost2[radioDelivery];
-            console.log(`isi arrayDelivery`, arrayDelivery);
+            // console.log(`isi arrayDelivery`, arrayDelivery);
 
             if (arrayDelivery != undefined) {
                 return arrayDelivery.map((valueDelivery, indexDelivery) => {
@@ -420,8 +304,8 @@ const UploadResepPage = (props) => {
 
     //& onClick tombol file akan minta user pilih gambar resep, simpan value resep di state
     const handleImageResep = (value) => {
-        console.log(`value handleImageResep`, value);
-        console.log(`show value size image resep`, value.size)
+        // console.log(`value handleImageResep`, value);
+        // console.log(`show value size image resep`, value.size)
 
         if (value.size <= 1000000) {
             if(value.type == "image/png" || value.type=="image/jpeg"){
@@ -444,15 +328,15 @@ const UploadResepPage = (props) => {
     //& onClick akan simpan gambar resep, alamat terpilih, ongkir terpilih di tabel transaksi
     const btnUnggahResep = async () => {
         setLoadingStatus(true);
-        console.log(`btnUnggahResep diklik`);
-        console.log(`idAddressForOngkir`, idAddressForOngkir);
-        console.log(`ongkir`, ongkir);
-        console.log(`resepPicture`, newImageResep);
+        // console.log(`btnUnggahResep diklik`);
+        // console.log(`idAddressForOngkir`, idAddressForOngkir);
+        // console.log(`ongkir`, ongkir);
+        // console.log(`resepPicture`, newImageResep);
 
         let token = localStorage.getItem("tokenIdUser");
 
         //^ cek ada token atau tidak
-        console.log(`btnBayar tokenIdUser`, token);
+        // console.log(`btnBayar tokenIdUser`, token);
 
         try {
             if (newImageResep == null || idAddressForOngkir == null || ongkir == 0) {
@@ -470,7 +354,7 @@ const UploadResepPage = (props) => {
                         idAddress: idAddressForOngkir,
                         freightCost: ongkir
                     }
-                    console.log(`data`, data);
+                    // console.log(`data`, data);
                     formData.append('data', JSON.stringify(data));
                     formData.append('resepPicture', newImageResep);
 
@@ -479,7 +363,7 @@ const UploadResepPage = (props) => {
                             'Authorization': `Bearer ${token}`
                         }
                     });
-                    console.log("isi res.data pas btnUnggahResep", res.data);
+                    // console.log("isi res.data pas btnUnggahResep", res.data);
                     dispatch(getTransactionAction());
                     navigate('/transactionlist');
                     setLoadingStatus(false);

@@ -1,5 +1,4 @@
 import axios from "axios";
-import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -36,9 +35,9 @@ function App() {
       role: state.userReducers.role,
     };
   });
-  console.log("ROLE APP.JSX", role);
+  // console.log("ROLE APP.JSX", role);
 
-  console.log("token app.jsx", token);
+  // console.log("token app.jsx", token);
   useEffect(() => {
     dispatch(keepLogin());
     (async () => {

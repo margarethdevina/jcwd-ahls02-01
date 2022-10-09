@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import Axios from 'axios';
-import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import bank1 from "../../Assets/DevImage/LogoBCA.png";
 import bank2 from "../../Assets/DevImage/LogoMandiri.png";
 import { getTransactionAction,getUserMenungguKonfirmasiAction } from "../../Redux/Actions/transactionActions";
-import { API_URL, BE_URL } from "../../helper";
+import { API_URL } from "../../helper";
 import { useToastHook } from "../../Components/CustomToast";
 
 import {
     Box,
     Image,
     Text,
-    Button,
-    ButtonGroup,
     Modal,
     ModalOverlay,
     ModalContent,
@@ -25,8 +23,6 @@ import {
     List,
     ListItem,
     ListIcon,
-    OrderedList,
-    UnorderedList,
     Accordion,
     AccordionItem,
     AccordionButton,
@@ -57,9 +53,7 @@ const ModalPaymentProofComponent = (props) => {
     const [isModalPaymentProofOpen, setIsModalPaymentProofOpen] = useState(false);
     const [newImageBukti, setNewImageBukti] = useState(null);
     const inputIdImageBukti = useRef(null);
-    // const [selectedIdTransaction, setSelectedIdTransaction] = useState(null);
     const [accordionIndex, setAccordionIndex] = useState(null);
-    // const [whichBank, setWhichBank] = useState("");
     const [paymentPlusAdminBank, setPaymentPlusAdminBank] = useState(0);
     const [bankInformation] = useState([
         {
@@ -106,7 +100,6 @@ const ModalPaymentProofComponent = (props) => {
 
                         <Box
                             display="flex"
-                            // textAlign="left"
                             gap={2}
                             justifyContent="space-between"
                             py={2}
@@ -240,8 +233,8 @@ const ModalPaymentProofComponent = (props) => {
 
     //& mungkin bisa di delete ini kalau semua dah digabung jadi 1 modal (si info bayar bca sama mandiri)
     const handleModalPaymentProof = () => {
-        console.log(`selectedTransaction`, props.selectedTransaction);
-        console.log(`totalPayment`, props.totalPayment);
+        // console.log(`selectedTransaction`, props.selectedTransaction);
+        // console.log(`totalPayment`, props.totalPayment);
 
         if (props.openModalPaymentProofFromCard == true) {
             setPaymentPlusAdminBank(props.totalPayment);
@@ -250,8 +243,8 @@ const ModalPaymentProofComponent = (props) => {
     }
 
     const handleImageBukti = (value) => {
-        console.log(`value handleImageBukti`, value);
-        console.log(`show value size image resep`, value.size);
+        // console.log(`value handleImageBukti`, value);
+        // console.log(`show value size image resep`, value.size);
         
         if (value.size <= 1000000) {
             if(value.type == "image/png" || value.type=="image/jpeg"){
@@ -272,16 +265,16 @@ const ModalPaymentProofComponent = (props) => {
 
     //& onClick akan upload bukti bayar ke tabel transaksi lalu tutup modal payment proof
     const btnUnggahBukti = async () => {
-        console.log(`btnUnggahBukti diklik`);
-        console.log(`selectedTransaction yg masuk ke modal`, props.selectedTransaction);
+        // console.log(`btnUnggahBukti diklik`);
+        // console.log(`selectedTransaction yg masuk ke modal`, props.selectedTransaction);
 
         let { idTransaction } = props.selectedTransaction;
-        console.log(`idTransaction setelah dipecah objeknya props`, idTransaction)
+        // console.log(`idTransaction setelah dipecah objeknya props`, idTransaction)
 
         let token = localStorage.getItem("tokenIdUser");
 
         //^ cek ada token atau tidak
-        console.log(`btnBayar tokenIdUser`, token);
+        // console.log(`btnBayar tokenIdUser`, token);
 
         try {
             if (newImageBukti == null || idTransaction == 0 || accordionIndex == null) {
@@ -297,7 +290,7 @@ const ModalPaymentProofComponent = (props) => {
                     let data = {
                         idTransaction
                     }
-                    console.log(`data`, data);
+                    // console.log(`data`, data);
                     formData.append('data', JSON.stringify(data));
                     formData.append('buktiPicture', newImageBukti);
 
@@ -306,7 +299,7 @@ const ModalPaymentProofComponent = (props) => {
                             'Authorization': `Bearer ${token}`
                         }
                     });
-                    console.log("isi res.data pas btnUnggahBukti", res.data);
+                    // console.log("isi res.data pas btnUnggahBukti", res.data);
                     dispatch(getTransactionAction());
                     dispatch(getUserMenungguKonfirmasiAction());
                     props.handleSendingToCardParentPaymentMethod();
@@ -440,17 +433,6 @@ const ModalPaymentProofComponent = (props) => {
                                         bg="var(--colorTwo)"
                                         className="font-brand"
                                     >
-                                        {/* <ListItem
-                                            display='flex'
-                                            alignItems='baseline'
-                                        >
-                                            <ListIcon as={FaCircle}
-                                                style={iconStyles}
-                                            />
-                                            <Text>
-                                                Bukti bayar harus diunggah maksimal 1 hari dari tanggal pembayaran, bila melewati batas waktu maka pesanan otomatis dibatalkan.
-                                            </Text>
-                                        </ListItem> */}
                                         <ListItem
                                             display='flex'
                                             alignItems='baseline'

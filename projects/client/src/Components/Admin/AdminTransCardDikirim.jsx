@@ -1,35 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
-import { useToastHook } from "../../Components/CustomToast";
-import { API_URL,BE_URL } from "../../helper";
+import { useNavigate } from "react-router-dom";
+import { BE_URL } from "../../helper";
 import { getAdminDikirimAction,getAdminFilterDikirimAction } from "../../Redux/Actions/transactionActions";
 import {
     Box,
-    Divider,
-    VStack,
-    Center,
-    Stack,
     Image,
     Text,
-    Button,
     ButtonGroup,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Input,
-    InputGroup,
-    InputLeftAddon,
-    Select,
-    Tabs,
-    TabList,
-    Tab,
-    TabPanels,
-    TabPanel
 } from "@chakra-ui/react";
 
 const AdminTransCardDikirimComponent = (props) => {
@@ -56,9 +35,9 @@ const AdminTransCardDikirimComponent = (props) => {
      }, [props.query])
  
      //^ cek props, state
-     console.log(`props.query`, props.query)
-     console.log(`transactionList`, transactionList);
-     console.log(`transactionLength`, transactionLength);
+    //  console.log(`props.query`, props.query)
+    //  console.log(`transactionList`, transactionList);
+    //  console.log(`transactionLength`, transactionLength);
  
      const getArrayFilteredSortedTransaction = () => {
          dispatch(getAdminFilterDikirimAction(props.query))
@@ -76,8 +55,8 @@ const AdminTransCardDikirimComponent = (props) => {
  
      const printBtnPagination = () => {
          let btn = []
-         console.log(`transactionLength di printBtnPagination`, transactionLength);
-         console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        //  console.log(`transactionLength di printBtnPagination`, transactionLength);
+        //  console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
          for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
              btn.push(
                  <Box

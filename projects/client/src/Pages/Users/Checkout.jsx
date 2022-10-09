@@ -7,10 +7,9 @@ import NavbarComponent from "../../Components/Users/Navbar";
 import { useToastHook } from "../../Components/CustomToast";
 import { getCartAction } from "../../Redux/Actions/cartActions";
 import { API_URL, BE_URL } from "../../helper";
-import { getAddress, getAddressActions } from "../../Redux/Actions/addressActions";
-import { getProvinceRajaOngkir, getProvinceActions2 } from "../../Redux/Actions/getProvinceActions";
-import { getCityRajaOngkir, getCityActions2 } from "../../Redux/Actions/getCityActions";
-import { getCostRajaOngkir, getCostActions2 } from "../../Redux/Actions/getCostActions";
+import { getAddress } from "../../Redux/Actions/addressActions";
+import { getProvinceRajaOngkir } from "../../Redux/Actions/getProvinceActions";
+import { getCostActions2 } from "../../Redux/Actions/getCostActions";
 import { getTransactionAction } from "../../Redux/Actions/transactionActions";
 import {
     Box,
@@ -53,7 +52,7 @@ const CheckoutPage = (props) => {
     const { state, search } = useLocation();
 
     //^ check state dari hasil navigate
-    console.log(`checkout pg-state dari page cart ${state}`);
+    // console.log(`checkout pg-state dari page cart ${state}`);
 
     //^ STATE MANAGEMENT
     const [subTotalAllCartItems, setSubTotalAllCartItems] = useState(0);
@@ -92,17 +91,15 @@ const CheckoutPage = (props) => {
     })
 
     //^ check isi databaseCart
-    console.log(`isi state databaseCart`, databaseCart);
-    console.log(`isi state getCost`, getCost);
-    console.log(`isi state getCost2`, getCost2);
+    // console.log(`isi state databaseCart`, databaseCart);
+    // console.log(`isi state getCost`, getCost);
+    // console.log(`isi state getCost2`, getCost2);
 
     // & component did mount
     useEffect(() => {
         handleSubTotal();
         dispatch(getAddress());
         dispatch(getProvinceRajaOngkir());
-        // dispatch(getCostRajaOngkir());
-        // handleCallbackToChild();
 
     }, [idAddressForOngkir, ongkir, total])
 
@@ -112,17 +109,15 @@ const CheckoutPage = (props) => {
         setLoadingStatus(true);
 
         let arrayIdCart = state
-        console.log(`arrayIdCart onCLick btnBackToCart ${arrayIdCart}`)
-
-        // navigate("/cart");
+        // console.log(`arrayIdCart onCLick btnBackToCart ${arrayIdCart}`)
 
         if (arrayIdCart.length > 0) {
-            console.log(`arrayIdCart.length > 0`);
+            // console.log(`arrayIdCart.length > 0`);
 
             let token = localStorage.getItem("tokenIdUser");
 
             //^ cek ada token atau tidak
-            console.log(`btnBackToCart tokenIdUser`, token);
+            // console.log(`btnBackToCart tokenIdUser`, token);
 
             if (token) {
                 Axios.post(`${API_URL}/cart/returnStock`, {
@@ -132,7 +127,7 @@ const CheckoutPage = (props) => {
                         'Authorization': `Bearer ${token}`
                     }
                 }).then((res) => {
-                    console.log("isi res.data pas returnToCart", res.data);
+                    // console.log("isi res.data pas returnToCart", res.data);
                     dispatch(getCartAction());
                     navigate("/cart");
                     setLoadingStatus(false);
@@ -161,7 +156,7 @@ const CheckoutPage = (props) => {
 
     // & untuk ambil alamat terpilih dari AccorAddressComponent
     const handleCallbackToChild = (idAddress, address, idProvince, idCity, receiverName, receiverPhone, label) => {
-        console.log(`isi handleCallbackToChild`, idAddress, address, idProvince, idCity, receiverName, receiverPhone, label);
+        // console.log(`isi handleCallbackToChild`, idAddress, address, idProvince, idCity, receiverName, receiverPhone, label);
 
         setLabelForOngkir(label);
         setReceiverNameForOngkir(receiverName);
@@ -179,17 +174,17 @@ const CheckoutPage = (props) => {
 
     const getCostRajaOngkir2 = async () => {
         try {
-            console.log(`idCityForOngkir`, idCityForOngkir);
+            // console.log(`idCityForOngkir`, idCityForOngkir);
 
             if (idCityForOngkir > 0) {
-                console.log(`getCostRajaOngkir 2 jalan`)
+                // console.log(`getCostRajaOngkir 2 jalan`)
                 let res = await Axios.get(`${API_URL}/rajaOngkir/getCost2`, {
                     headers: {
                         kota: idCityForOngkir
                     }
                 })
                 if (res.data) {
-                    console.log(`RES DATA GETCOST2 RAJA ONGKIR`, res.data.dataOngkir);
+                    // console.log(`RES DATA GETCOST2 RAJA ONGKIR`, res.data.dataOngkir);
                     dispatch(getCostActions2(res.data.dataOngkir));
                 }
             }
@@ -245,20 +240,20 @@ const CheckoutPage = (props) => {
                 })
             } else if (idAddressForOngkir) {
 
-                console.log(`DARI ACCORDION idAddress ${idAddressForOngkir}, address ${addressForOngkir}, idProvince ${idProvinceForOngkir}, idCity ${idCityForOngkir}, receiverName ${receiverNameForOngkir}, receiverPhone ${receiverPhoneForOngkir}, label ${labelForOngkir}`);
+                // console.log(`DARI ACCORDION idAddress ${idAddressForOngkir}, address ${addressForOngkir}, idProvince ${idProvinceForOngkir}, idCity ${idCityForOngkir}, receiverName ${receiverNameForOngkir}, receiverPhone ${receiverPhoneForOngkir}, label ${labelForOngkir}`);
 
                 setIsTambahAlamat(0);
                 setIsModalAddressOpen(false);
 
                 if (idCityForOngkir) {
-                    console.log(`ada idCityForOngkir nya untuk dioper ke getCost2`);
+                    // console.log(`ada idCityForOngkir nya untuk dioper ke getCost2`);
                     let res = await Axios.get(`${API_URL}/rajaOngkir/getCost2`, {
                         headers: {
                             kota: idCityForOngkir
                         }
                     })
                     if (res.data) {
-                        console.log(`RES DATA GETCOST2 RAJAONGKIR`, res.data);
+                        // console.log(`RES DATA GETCOST2 RAJAONGKIR`, res.data);
                         dispatch(getCostActions2(res.data));
                     }
                 } else {
@@ -267,7 +262,7 @@ const CheckoutPage = (props) => {
 
 
             } else {
-                console.log(`idAddressForOngkir`, idAddressForOngkir)
+                // console.log(`idAddressForOngkir`, idAddressForOngkir)
                 newToast({
                     title: `Alamat Belum Terpilih`,
                     description: "Pilih dahulu alamat yang ingin dituju",
@@ -314,10 +309,10 @@ const CheckoutPage = (props) => {
     const printDelivery = (radioDelivery) => {
         if (getCost != undefined) {
 
-            console.log(`isi getCost di printDelivery`, getCost);
-            console.log(`isi getCost2 di printDelivery`, getCost2);
+            // console.log(`isi getCost di printDelivery`, getCost);
+            // console.log(`isi getCost2 di printDelivery`, getCost2);
             let arrayDelivery = getCost[radioDelivery];
-            console.log(`isi arrayDelivery`, arrayDelivery);
+            // console.log(`isi arrayDelivery`, arrayDelivery);
 
             if (arrayDelivery != undefined) {
 
@@ -349,9 +344,9 @@ const CheckoutPage = (props) => {
 
         } else if (getCost2 != undefined) {
 
-            console.log(`isi getCost2 di printDelivery`, getCost2);
+            // console.log(`isi getCost2 di printDelivery`, getCost2);
             let arrayDelivery = getCost2[radioDelivery];
-            console.log(`isi arrayDelivery`, arrayDelivery);
+            // console.log(`isi arrayDelivery`, arrayDelivery);
 
             if (arrayDelivery != undefined) {
                 return arrayDelivery.map((valueDelivery, indexDelivery) => {
@@ -386,12 +381,12 @@ const CheckoutPage = (props) => {
         setLoadingStatus(true);
 
         let arrayIdCart = state
-        console.log(`arrayIdCart onCLick btnBayar ${arrayIdCart}`)
-        console.log(`idAddressForOngkir`, idAddressForOngkir);
-        console.log(`ongkir`, ongkir)
+        // console.log(`arrayIdCart onCLick btnBayar ${arrayIdCart}`)
+        // console.log(`idAddressForOngkir`, idAddressForOngkir);
+        // console.log(`ongkir`, ongkir)
 
         if (arrayIdCart.length > 0) {
-            console.log(`arrayIdCart.length > 0`);
+            // console.log(`arrayIdCart.length > 0`);
 
             let token = localStorage.getItem("tokenIdUser");
 
@@ -411,7 +406,7 @@ const CheckoutPage = (props) => {
                         'Authorization': `Bearer ${token}`
                     }
                 }).then((res) => {
-                    console.log("isi res.data pas btnBayar", res.data);
+                    // console.log("isi res.data pas btnBayar", res.data);
                     dispatch(getTransactionAction());
                     navigate("/transactionlist");
                     setLoadingStatus(false);

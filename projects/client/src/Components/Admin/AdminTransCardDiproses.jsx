@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
-import { useToastHook } from "../../Components/CustomToast";
-import { API_URL, BE_URL } from "../../helper";
+import { useNavigate } from "react-router-dom";
+import { BE_URL } from "../../helper";
 import { getAdminDiprosesAction, getAdminFilterDiprosesAction, updateTransactionStatusOnlyAction, cancellingOrderAction } from "../../Redux/Actions/transactionActions";
 import {
     Box,
@@ -52,9 +51,9 @@ const AdminTransCardDiprosesComponent = (props) => {
     }, [props.query, kirimPesanan, batalkanPesanan])
 
     //^ cek props, state
-    console.log(`props.query`, props.query)
-    console.log(`transactionList`, transactionList);
-    console.log(`transactionLength`, transactionLength);
+    // console.log(`props.query`, props.query)
+    // console.log(`transactionList`, transactionList);
+    // console.log(`transactionLength`, transactionLength);
 
     const getArrayFilteredSortedTransaction = () => {
         dispatch(getAdminFilterDiprosesAction(props.query))
@@ -72,8 +71,8 @@ const AdminTransCardDiprosesComponent = (props) => {
 
     const printBtnPagination = () => {
         let btn = []
-        console.log(`transactionLength di printBtnPagination`, transactionLength);
-        console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        // console.log(`transactionLength di printBtnPagination`, transactionLength);
+        // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
         for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
             btn.push(
                 <Box

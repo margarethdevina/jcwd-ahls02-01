@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useToastHook } from "../../Components/CustomToast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CartItemComponent from "../../Components/Users/CartItem";
 import NavbarComponent from "../../Components/Users/Navbar";
 import { getCartAction } from "../../Redux/Actions/cartActions";
 import { API_URL } from "../../helper";
-// import CheckoutPage from "./Checkout";
 import {
     Box,
     Divider,
@@ -40,24 +39,24 @@ const CartPage = (props) => {
     })
 
     //^ check isi databaseCart
-    console.log(`databaseCart`, databaseCart);
+    // console.log(`databaseCart`, databaseCart);
 
     const handleCallbackToChild = (subTotalData = 0, selectedIdCart) => {
         setSubTotalAllCartItems(subTotalData);
         setArrayIdCart(selectedIdCart);
     };
 
-    console.log(`arrayIdCart cartPage ${arrayIdCart}`);
-    console.log(`typeof arrayIdCart di cartPage ${typeof (arrayIdCart)}`);
+    // console.log(`arrayIdCart cartPage ${arrayIdCart}`);
+    // console.log(`typeof arrayIdCart di cartPage ${typeof (arrayIdCart)}`);
 
     const btnCheckout = () => {
         setLoadingStatus(true);
         //idCart yang terselect, isActive diubah jd false, subTotal dijumlah semua
-        console.log(`subTotal ${subTotalAllCartItems}`);
-        console.log(`arrayIdCart onCLick btnCheckout ${arrayIdCart}`);
+        // console.log(`subTotal ${subTotalAllCartItems}`);
+        // console.log(`arrayIdCart onCLick btnCheckout ${arrayIdCart}`);
 
         if (arrayIdCart.length == 0) {
-            console.log(`arrayIdCart ${arrayIdCart}`);
+            // console.log(`arrayIdCart ${arrayIdCart}`);
 
             setLoadingStatus(false);
             newToast({
@@ -67,12 +66,12 @@ const CartPage = (props) => {
             })
         } else {
 
-            console.log(`arrayIdCart onClick btnCheckout`, arrayIdCart);
+            // console.log(`arrayIdCart onClick btnCheckout`, arrayIdCart);
 
             let token = localStorage.getItem("tokenIdUser");
 
             //^ cek ada token atau tidak
-            console.log(`btnCheckout tokenIdUser`, token);
+            // console.log(`btnCheckout tokenIdUser`, token);
 
             if (token) {
                 Axios.post(`${API_URL}/cart/checkout`, {
@@ -82,7 +81,7 @@ const CartPage = (props) => {
                         'Authorization': `Bearer ${token}`
                     }
                 }).then((res) => {
-                    console.log("isi res.data pas checkout", res.data);
+                    // console.log("isi res.data pas checkout", res.data);
                     dispatch(getCartAction());
                     navigate("/checkout", { state: arrayIdCart });
                     setLoadingStatus(false);

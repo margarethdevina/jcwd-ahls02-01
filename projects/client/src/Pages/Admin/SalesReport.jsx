@@ -1,13 +1,10 @@
 import Axios from "axios";
 import React from "react";
-import {Bar, Line} from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
 import { API_URL } from "../../helper";
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
-import { Text, useMediaQuery, Box, Button, Flex, Divider, TableContainer, Table, TableCaption, Thead, Tbody, Tfoot,
-        Tr, Th, Td, Input, Tabs, TabList, Tab, TabPanels, TabPanel} from '@chakra-ui/react';
-import logo2 from "../../Assets/DevImage/LogoMedhikaPutih.png";
+import { useNavigate } from "react-router-dom";
+import { Text, useMediaQuery, Box, 
+        Tr, Td, Tabs, TabList, Tab, TabPanels, TabPanel} from '@chakra-ui/react';
 import Sidebar from "../../Components/Admin/Sidebar";
 import SalesReportByTransaction from "../../Components/Admin/SalesReportByTransaction";
 import SalesReportByProduct from "../../Components/Admin/SalesReportByProduct";
@@ -25,7 +22,7 @@ const SalesReport=(props)=>{
     getSalesByInvoice()
   }, [])
 
-  console.log("PROFIT HARI INIIII", salesByInvoice)
+  // console.log("PROFIT HARI INIIII", salesByInvoice)
 
   const getSalesByInvoice = async() => {
     try {
@@ -36,7 +33,7 @@ const SalesReport=(props)=>{
         }
       })
       if (res.data) {
-        console.log("RES DATA GET SALES BY INVOICE", res.data)
+        // console.log("RES DATA GET SALES BY INVOICE", res.data)
         setSalesByInvoice(res.data)
       }
     } catch (error) {

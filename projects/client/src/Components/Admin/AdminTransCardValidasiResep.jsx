@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
-import { useToastHook } from "../CustomToast";
-import { API_URL, BE_URL } from "../../helper";
+import { useNavigate } from "react-router-dom";
+import { BE_URL } from "../../helper";
 import { getAdminValidasiResepAction, getAdminFilterValidasiResepAction,updateTransactionStatusOnlyAction } from "../../Redux/Actions/transactionActions";
 import {
     Box,
@@ -12,16 +10,6 @@ import {
     Text,
     Button,
     ButtonGroup,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Input,
-    InputGroup,
-    InputLeftAddon,
-    Select,
 } from "@chakra-ui/react";
 
 const AdminTransCardValidasiResepComponent = (props) => {
@@ -51,9 +39,9 @@ const AdminTransCardValidasiResepComponent = (props) => {
     }, [props.query,tagihDiklik])
 
     //^ cek props, state
-    console.log(`props.query`, props.query)
-    console.log(`transactionList`, transactionList);
-    console.log(`transactionLength`, transactionLength);
+    // console.log(`props.query`, props.query)
+    // console.log(`transactionList`, transactionList);
+    // console.log(`transactionLength`, transactionLength);
 
     const getArrayFilteredSortedTransaction = () => {
         dispatch(getAdminFilterValidasiResepAction(props.query))
@@ -71,8 +59,8 @@ const AdminTransCardValidasiResepComponent = (props) => {
 
     const printBtnPagination = () => {
         let btn = []
-        console.log(`transactionLength di printBtnPagination`, transactionLength);
-        console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        // console.log(`transactionLength di printBtnPagination`, transactionLength);
+        // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
         for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
             btn.push(
                 <Box
@@ -111,8 +99,6 @@ const AdminTransCardValidasiResepComponent = (props) => {
         return btn;
     }
 
-    //! pending list product dr hasil konversi / validasi resep
-    //! pending handling subtotal
     const printSemuaTransaksi = () => {
         if (transactionList.length > 0) {
             return transactionList.map((value, index) => {
@@ -159,10 +145,8 @@ const AdminTransCardValidasiResepComponent = (props) => {
                                     Validasi Resep
                                 </Button>
 
-                                {/* UPDATE V2.0 */}
                                 <>
                                     <Box
-                                        // display='flex-vertical'
                                         alignItems='start'
                                         justifyContent='space-between'
                                         className="font-brand"

@@ -56,9 +56,9 @@ const TransCardDibatalkanComponent = (props) => {
     }, [props.query])
 
     //^ cek props, state
-    console.log(`props.query`, props.query)
-    console.log(`transactionList`, transactionList);
-    console.log(`transactionLength`, transactionLength);
+    // console.log(`props.query`, props.query)
+    // console.log(`transactionList`, transactionList);
+    // console.log(`transactionLength`, transactionLength);
 
     const getArrayFilteredSortedTransaction = () => {
         dispatch(getUserFilterDibatalkanAction(props.query))
@@ -76,8 +76,8 @@ const TransCardDibatalkanComponent = (props) => {
 
     const printBtnPagination = () => {
         let btn = []
-        console.log(`transactionLength di printBtnPagination`, transactionLength);
-        console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        // console.log(`transactionLength di printBtnPagination`, transactionLength);
+        // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
         for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
             btn.push(
                 <Box

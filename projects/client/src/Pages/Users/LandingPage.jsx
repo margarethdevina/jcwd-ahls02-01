@@ -12,33 +12,23 @@ import jaminan2 from "../../Assets/DevImage/Jaminan2.png";
 import jaminan3 from "../../Assets/DevImage/Jaminan3.png";
 import bank1 from "../../Assets/DevImage/LogoBCA.png";
 import bank2 from "../../Assets/DevImage/LogoMandiri.png";
-import obat1 from "../../Assets/DevImage/Panadol.jpg";
-import obat2 from "../../Assets/DevImage/Decolgen.jpg";
-import obat3 from "../../Assets/DevImage/Blackmores.jpg";
-import obat4 from "../../Assets/DevImage/Enervon-C.jpg";
-import obat5 from "../../Assets/DevImage/Derma.jpg";
 import NavbarComponent from "../../Components/Users/Navbar";
 import Modal from "../../Components/Users/ModalLogin";
 import FooterComponent from "../../Components/Users/Footer";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useToastHook } from "../../Components/CustomToast";
 import {
   useMediaQuery,
   Flex,
   Box,
-  Heading,
-  Input,
   Image,
   Text,
   Divider,
   Spacer,
-  ButtonGroup,
   Button,
   Link,
-  extendTheme,
 } from "@chakra-ui/react";
-import ModalConversion from "../../Components/Admin/ModalConversion";
 
 const LandingPage = (props) => {
   const navigate = useNavigate();
@@ -53,11 +43,10 @@ const LandingPage = (props) => {
   }, []);
 
   const fetchProductList = () => {
-    let token = localStorage.getItem("tokenIdUser");
-    Axios.get(`${API_URL}/users/getproducts`, {
+    Axios.post(`${API_URL}/users/getproducts`, {
     }).then((res) => {
       setProductData(res.data.data);
-      console.log(res.data);
+      // console.log(res.data);
     });
   };
 
@@ -73,8 +62,8 @@ const LandingPage = (props) => {
     }
   );
 
-  console.log("S T A T U S LandingPage", isVerified);
-  console.log("productData LandingPage", productData)
+  // console.log("S T A T U S LandingPage", isVerified);
+  // console.log("productData LandingPage", productData)
   const btnCart = async () => {
     try {
       setLoadingStat(true);
@@ -221,8 +210,8 @@ const LandingPage = (props) => {
                             <Image src={kategori1} width='70%' style={{ marginLeft: "25px", marginTop: "5px" }} />
                           </div>
                           <div class="col-7 my-auto">
-                            <Link href="/productlist/1"  class="h6-link">Obat-Obatan</Link>
-                            
+                            <Link href="/productlist/1" class="h6-link">Obat-Obatan</Link>
+
                           </div>
                         </div>
                       </Box>
@@ -234,7 +223,7 @@ const LandingPage = (props) => {
                             <Image src={kategori2} width='70%' style={{ marginLeft: "25px", marginTop: "5px" }} />
                           </div>
                           <div class="col-7 my-auto">
-                            <Link  href="/productlist/2" class="h6" style={{ marginTop: "50px" }}>Vitamin & Suplemen</Link>
+                            <Link href="/productlist/2" class="h6" style={{ marginTop: "50px" }}>Vitamin & Suplemen</Link>
                           </div>
                         </div>
                       </Box>
@@ -246,8 +235,8 @@ const LandingPage = (props) => {
                             <Image src={kategori3} width='70%' style={{ marginLeft: "25px", marginTop: "5px" }} />
                           </div>
                           <div class="col-7 my-auto">
-                            <a href="/productlist/3"  style={{align:"center"}}>Perawatan Tubuh</a>
-                            
+                            <a href="/productlist/3" style={{ align: "center" }}>Perawatan Tubuh</a>
+
                           </div>
                         </div>
                       </Box>
@@ -282,7 +271,7 @@ const LandingPage = (props) => {
                                 </Box>
                               </div>
                               <div class="row">
-                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp. {productData[1].priceSale.toLocaleString()} / {productData[1].defaultUnit}</Text>
+                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp {productData[1].priceSale.toLocaleString()} / {productData[1].defaultUnit}</Text>
                               </div>
                             </div>
                             <div class="d-flex justify-content-center mt-2">
@@ -302,7 +291,7 @@ const LandingPage = (props) => {
                                 </Box>
                               </div>
                               <div class="row">
-                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp. {productData[2].priceSale.toLocaleString()} / {productData[2].defaultUnit}</Text>
+                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp {productData[2].priceSale.toLocaleString()} / {productData[2].defaultUnit}</Text>
                               </div>
                             </div>
                             <div class="d-flex justify-content-center mt-2">
@@ -322,7 +311,7 @@ const LandingPage = (props) => {
                                 </Box>
                               </div>
                               <div class="row">
-                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp. {productData[5].priceSale.toLocaleString()} / {productData[5].defaultUnit}</Text>
+                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp {productData[5].priceSale.toLocaleString()} / {productData[5].defaultUnit}</Text>
                               </div>
                             </div>
                             <div class="d-flex justify-content-center mt-2">
@@ -342,7 +331,7 @@ const LandingPage = (props) => {
                                 </Box>
                               </div>
                               <div class="row">
-                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp. {productData[0].priceSale.toLocaleString()} / {productData[0].defaultUnit}</Text>
+                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp {productData[0].priceSale.toLocaleString()} / {productData[0].defaultUnit}</Text>
                               </div>
                             </div>
                             <div class="d-flex justify-content-center mt-2">
@@ -362,7 +351,7 @@ const LandingPage = (props) => {
                                 </Box>
                               </div>
                               <div class="row">
-                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp. {productData[7].priceSale.toLocaleString()} / {productData[7].defaultUnit}</Text>
+                                <Text class="h6b" style={{ marginTop: "65px", marginLeft: "20px" }}>Rp {productData[7].priceSale.toLocaleString()} / {productData[7].defaultUnit}</Text>
                               </div>
                             </div>
                             <div class="d-flex justify-content-center mt-2">
@@ -479,168 +468,172 @@ const LandingPage = (props) => {
               </div>
             </div>
           </>
-        ) : (
-          <>
-            <div>
-              <Box marginTop={"400px"}>
-                <Text class="h6b">Rekomendasi</Text>
-              </Box>
-              <div style={{ height: "400px" }}>
-                <div class="row">
-                  <div class="col-12 d-flex justify-content-center">
-                    <Box borderRadius={"10px"} width="80%" height="85%" boxShadow='lg' bg='#FFFFFF' marginTop={"50px"} paddingBottom={"10px"}>
-                      <div class="row">
-                        <div class="row d-flex justify-content-center text-center">
-                          <Image src={obat1} width='35%' style={{ marginLeft: "25px" }} />
-                          <Text class="h6b" style={{ marginLeft: "35px", marginBottom: "20px" }}>Panadol</Text>
+        ) :
+          (
+            productData.length > 0
+            &&
+            <>
+              <div>
+                <Box marginTop={"400px"}>
+                  <Text class="h6b">Rekomendasi</Text>
+                </Box>
+                <div style={{ height: "400px" }}>
+                  <div class="row">
+                    <div class="col-12 d-flex justify-content-center">
+                      <Box borderRadius={"10px"} width="80%" height="85%" boxShadow='lg' bg='#FFFFFF' marginTop={"50px"} paddingBottom={"10px"}>
+                        <div class="row">
+                          <div class="row d-flex justify-content-center text-center">
+                            <Image src={BE_URL + productData[1].productPicture} width='35%' style={{ marginLeft: "25px" }} />
+                            <Text class="h6b" style={{ marginLeft: "35px", marginBottom: "20px" }}>{productData[1].productName}</Text>
+                          </div>
+                          <div class="row text-center">
+                            <Text class="h6b" style={{ marginLeft: "20px" }}>Rp {productData[1].priceSale.toLocaleString()} / {productData[1].defaultUnit}</Text>
+                          </div>
                         </div>
-                        <div class="row text-center">
-                          <Text class="h6b" style={{ marginLeft: "20px" }}>Rp. 12.000 / Saset</Text>
+                        <div class="d-flex justify-content-center mt-2">
+                          <Button isLoading={loadingStat}
+                            class="btn-rekom" onClick={() => navigate(`/productDetail/${productData[1].idProduct}`)}>Detail Product</Button>
+                          <Modal style={{ color: "#000000" }} onClose={() => setShow(!show)} show={show} />
                         </div>
-                      </div>
-                      <div class="d-flex justify-content-center mt-2">
-                        <Button isLoading={loadingStat}
-                          class="btn-rekom" onClick={btnCart}>Add To Cart</Button>
-                        <Modal style={{ color: "#000000" }} onClose={() => setShow(!show)} show={show} />
-                      </div>
-                    </Box>
-                  </div>
-                  <div class="col-12 d-flex justify-content-center">
-                    <Box borderRadius={"10px"} width="80%" height="85%" boxShadow='lg' bg='#FFFFFF' marginTop={"50px"} paddingBottom={"10px"}>
-                      <div class="row">
-                        <div class="row d-flex justify-content-center text-center">
-                          <Image src={obat3} width='35%' style={{ marginLeft: "25px" }} />
-                          <Text class="h6b" style={{ marginLeft: "35px", marginBottom: "20px" }}>Blackmores Multivitamin</Text>
+                      </Box>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                      <Box borderRadius={"10px"} width="80%" height="85%" boxShadow='lg' bg='#FFFFFF' marginTop={"50px"} paddingBottom={"10px"}>
+                        <div class="row">
+                          <div class="row d-flex justify-content-center text-center">
+                            <Image src={BE_URL + productData[2].productPicture} width='35%' style={{ marginLeft: "25px" }} />
+                            <Text class="h6b" style={{ marginLeft: "35px", marginBottom: "20px" }}>{productData[2].productName}</Text>
+                          </div>
+                          <div class="row text-center">
+                            <Text class="h6b" style={{ marginLeft: "20px" }}>Rp {productData[2].priceSale.toLocaleString()} / {productData[2].defaultUnit}</Text>
+                          </div>
                         </div>
-                        <div class="row text-center">
-                          <Text class="h6b" style={{ marginLeft: "20px" }}>Rp. 550.000 / Botol</Text>
+                        <div class="d-flex justify-content-center mt-2">
+                          <Button isLoading={loadingStat}
+                            class="btn-rekom" onClick={() => navigate(`/productDetail/${productData[2].idProduct}`)}>Detail Product</Button>
+                          <Modal style={{ color: "#000000" }} onClose={() => setShow(!show)} show={show} />
                         </div>
-                      </div>
-                      <div class="d-flex justify-content-center mt-2">
-                        <Button isLoading={loadingStat}
-                          class="btn-rekom" onClick={btnCart}>Add To Cart</Button>
-                        <Modal style={{ color: "#000000" }} onClose={() => setShow(!show)} show={show} />
-                      </div>
-                    </Box>
-                  </div>
-                  <div class="col-12 d-flex justify-content-center">
-                    <Box borderRadius={"10px"} width="80%" height="85%" boxShadow='lg' bg='#FFFFFF' marginTop={"50px"} paddingBottom={"10px"}>
-                      <div class="row">
-                        <div class="row d-flex justify-content-center text-center">
-                          <Image src={obat5} width='35%' style={{ marginLeft: "25px" }} />
-                          <Text class="h6b" style={{ marginLeft: "35px", marginBottom: "20px" }}>Derma AnGel Acne Patch Day</Text>
+                      </Box>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                      <Box borderRadius={"10px"} width="80%" height="85%" boxShadow='lg' bg='#FFFFFF' marginTop={"50px"} paddingBottom={"10px"}>
+                        <div class="row">
+                          <div class="row d-flex justify-content-center text-center">
+                            <Image src={BE_URL + productData[5].productPicture} width='35%' style={{ marginLeft: "25px" }} />
+                            <Text class="h6b" style={{ marginLeft: "35px", marginBottom: "20px" }}>{productData[5].productName}</Text>
+                          </div>
+                          <div class="row text-center">
+                            <Text class="h6b" style={{ marginLeft: "20px" }}>Rp {productData[5].priceSale.toLocaleString()} / {productData[5].defaultUnit}</Text>
+                          </div>
                         </div>
-                        <div class="row text-center">
-                          <Text class="h6b" style={{ marginLeft: "20px" }}>Rp. 16.500 / Saset</Text>
+                        <div class="d-flex justify-content-center mt-2">
+                          <Button isLoading={loadingStat}
+                            class="btn-rekom" onClick={() => navigate(`/productDetail/${productData[5].idProduct}`)}>Detail Product</Button>
+                          <Modal style={{ color: "#000000" }} onClose={() => setShow(!show)} show={show} />
                         </div>
-                      </div>
-                      <div class="d-flex justify-content-center mt-2">
-                        <Button isLoading={loadingStat}
-                          class="btn-rekom" onClick={btnCart}>Add To Cart</Button>
-                        <Modal style={{ color: "#000000" }} onClose={() => setShow(!show)} show={show} />
-                      </div>
-                    </Box>
+                      </Box>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <Divider borderWidth={"1px"} borderColor={"#333333"} style={{ marginTop: "470px" }} />
-            <Box marginTop={"40px"}>
-              <Text class="h6b">Jaminan Untuk Anda</Text>
-            </Box>
-            <div class="row mt-5">
-              <div class="col-12">
-                <Box
-                  borderRadius={"10px"}
-                  height="100%"
-                  width="100%"
-                  boxShadow="md"
-                  bg="#F6F8FC"
-                  paddingBottom={"10px"}
-                >
-                  <div class="row">
-                    <div class="col-5">
-                      <Image
-                        src={jaminan1}
-                        width="80%"
-                        style={{ marginLeft: "25px", marginTop: "15px" }}
-                      />
+              <Divider borderWidth={"1px"} borderColor={"#333333"} style={{ marginTop: "470px" }} />
+              <Box marginTop={"40px"}>
+                <Text class="h6b">Jaminan Untuk Anda</Text>
+              </Box>
+              <div class="row mt-5">
+                <div class="col-12">
+                  <Box
+                    borderRadius={"10px"}
+                    height="100%"
+                    width="100%"
+                    boxShadow="md"
+                    bg="#F6F8FC"
+                    paddingBottom={"10px"}
+                  >
+                    <div class="row">
+                      <div class="col-5">
+                        <Image
+                          src={jaminan1}
+                          width="80%"
+                          style={{ marginLeft: "25px", marginTop: "15px" }}
+                        />
+                      </div>
+                      <div class="col-7">
+                        <Text class="h6b" style={{ marginTop: "30px" }}>
+                          100% Obat Asli
+                        </Text>
+                        <Text class="h6" style={{ marginTop: "10px" }}>
+                          Semua produk yang kami jual dijamin asli & kualitas
+                          terbaik untuk Anda.
+                        </Text>
+                      </div>
                     </div>
-                    <div class="col-7">
-                      <Text class="h6b" style={{ marginTop: "30px" }}>
-                        100% Obat Asli
-                      </Text>
-                      <Text class="h6" style={{ marginTop: "10px" }}>
-                        Semua produk yang kami jual dijamin asli & kualitas
-                        terbaik untuk Anda.
-                      </Text>
+                  </Box>
+                </div>
+                <div class="col-12">
+                  <Box
+                    borderRadius={"10px"}
+                    height="100%"
+                    width="100%"
+                    boxShadow="md"
+                    bg="#F6F8FC"
+                    mt={"20px"}
+                    paddingBottom={"10px"}
+                  >
+                    <div class="row">
+                      <div class="col-5">
+                        <Image
+                          src={jaminan2}
+                          width="80%"
+                          style={{ marginLeft: "25px", marginTop: "5px" }}
+                        />
+                      </div>
+                      <div class="col-7">
+                        <Text class="h6b" style={{ marginTop: "30px" }}>
+                          Dijamin Hemat
+                        </Text>
+                        <Text class="h6" style={{ marginTop: "10px" }}>
+                          Harga yang kami tawarkan lebih murah dari apotek online
+                          lainnya.
+                        </Text>
+                      </div>
                     </div>
-                  </div>
-                </Box>
+                  </Box>
+                </div>
+                <div class="col-12">
+                  <Box
+                    borderRadius={"10px"}
+                    height="100%"
+                    width="100%"
+                    boxShadow="md"
+                    bg="#F6F8FC"
+                    mt={"40px"}
+                    paddingBottom={"10px"}
+                  >
+                    <div class="row">
+                      <div class="col-5">
+                        <Image
+                          src={jaminan3}
+                          width="95%"
+                          style={{ marginLeft: "20px", marginTop: "15px" }}
+                        />
+                      </div>
+                      <div class="col-7">
+                        <Text class="h6b" style={{ marginTop: "30px" }}>
+                          Pengiriman Cepat
+                        </Text>
+                        <Text class="h6" style={{ marginTop: "10px" }}>
+                          Tak perlu antre, kami akan kirim ke alamat Anda dengan
+                          waktu yang cepat!
+                        </Text>
+                      </div>
+                    </div>
+                  </Box>
+                </div>
               </div>
-              <div class="col-12">
-                <Box
-                  borderRadius={"10px"}
-                  height="100%"
-                  width="100%"
-                  boxShadow="md"
-                  bg="#F6F8FC"
-                  mt={"20px"}
-                  paddingBottom={"10px"}
-                >
-                  <div class="row">
-                    <div class="col-5">
-                      <Image
-                        src={jaminan2}
-                        width="80%"
-                        style={{ marginLeft: "25px", marginTop: "5px" }}
-                      />
-                    </div>
-                    <div class="col-7">
-                      <Text class="h6b" style={{ marginTop: "30px" }}>
-                        Dijamin Hemat
-                      </Text>
-                      <Text class="h6" style={{ marginTop: "10px" }}>
-                        Harga yang kami tawarkan lebih murah dari apotek online
-                        lainnya.
-                      </Text>
-                    </div>
-                  </div>
-                </Box>
-              </div>
-              <div class="col-12">
-                <Box
-                  borderRadius={"10px"}
-                  height="100%"
-                  width="100%"
-                  boxShadow="md"
-                  bg="#F6F8FC"
-                  mt={"40px"}
-                  paddingBottom={"10px"}
-                >
-                  <div class="row">
-                    <div class="col-5">
-                      <Image
-                        src={jaminan3}
-                        width="95%"
-                        style={{ marginLeft: "20px", marginTop: "15px" }}
-                      />
-                    </div>
-                    <div class="col-7">
-                      <Text class="h6b" style={{ marginTop: "30px" }}>
-                        Pengiriman Cepat
-                      </Text>
-                      <Text class="h6" style={{ marginTop: "10px" }}>
-                        Tak perlu antre, kami akan kirim ke alamat Anda dengan
-                        waktu yang cepat!
-                      </Text>
-                    </div>
-                  </div>
-                </Box>
-              </div>
-            </div>
-          </>
-        )}
+            </>
+          )
+        }
         <br />
         <br />
         <br />

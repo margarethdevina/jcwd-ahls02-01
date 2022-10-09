@@ -45,7 +45,7 @@ export const ModalCreate = (props) => {
       })
       .then((res) => {
         setCategoryList(res.data.data);
-        console.log(res.data);
+        // console.log(res.data);
       });
   }
   const Selectcategory = (props) => {
@@ -181,7 +181,7 @@ export const ModalEdit = (props) => {
       })
       .then((res) => {
         setCategoryList(res.data.data);
-        console.log(res.data);
+        // console.log(res.data);
       });
   }
   const Selectcategory = (props) => {

@@ -1,35 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Axios from 'axios';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
-import { useToastHook } from "../../Components/CustomToast";
+import { useNavigate } from "react-router-dom";
 import { getAdminPesananDikonfirmasiAction,getAdminFilterPesananDikonfirmasiAction } from "../../Redux/Actions/transactionActions";
-import { API_URL,BE_URL } from "../../helper";
+import { BE_URL } from "../../helper";
 import {
     Box,
-    Divider,
-    VStack,
-    Center,
-    Stack,
     Image,
     Text,
-    Button,
     ButtonGroup,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Input,
-    InputGroup,
-    InputLeftAddon,
-    Select,
-    Tabs,
-    TabList,
-    Tab,
-    TabPanels,
-    TabPanel
 } from "@chakra-ui/react";
 
 const AdminTransCardPesananDikonfirmasiComponent = (props) => {
@@ -56,9 +34,9 @@ const AdminTransCardPesananDikonfirmasiComponent = (props) => {
     }, [props.query])
 
     //^ cek props, state
-    console.log(`props.query`, props.query)
-    console.log(`transactionList`, transactionList);
-    console.log(`transactionLength`, transactionLength);
+    // console.log(`props.query`, props.query)
+    // console.log(`transactionList`, transactionList);
+    // console.log(`transactionLength`, transactionLength);
 
     const getArrayFilteredSortedTransaction = () => {
         dispatch(getAdminFilterPesananDikonfirmasiAction(props.query))
@@ -76,8 +54,8 @@ const AdminTransCardPesananDikonfirmasiComponent = (props) => {
 
     const printBtnPagination = () => {
         let btn = []
-        console.log(`transactionLength di printBtnPagination`, transactionLength);
-        console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        // console.log(`transactionLength di printBtnPagination`, transactionLength);
+        // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
         for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
             btn.push(
                 <Box

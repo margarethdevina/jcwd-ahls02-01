@@ -4,16 +4,11 @@ import { API_URL } from "../../helper";
 import {
   Text,
   useMediaQuery,
-  Image,
-  IconButton,
-  Flex,
-  Box,
   Table,
   TableContainer,
   Tr,
   Th,
   Td,
-  TableCaption,
   Thead,
   Tbody,
   Button,
@@ -25,7 +20,6 @@ import {
   Input,
 } from "@chakra-ui/react";
 import Sidebar from "../../Components/Admin/Sidebar";
-import ModalConversion from "../../Components/Admin/ModalConversion";
 
 const ModalCreate = (props) => {
   const [newCategory, setNewCategory] = test.useState("");
@@ -36,7 +30,7 @@ const ModalCreate = (props) => {
         <Input
           placeholder="Input nama kategori"
           onChange={(event) => {
-            console.log(event.target.value);
+            // console.log(event.target.value);
             setNewCategory(event.target.value);
           }}
         />
@@ -68,7 +62,7 @@ const ModalEdit = (props) => {
         <Input
           value={editCategory}
           onChange={(event) => {
-            console.log(event.target.value);
+            // console.log(event.target.value);
             seteditCategory(event.target.value);
           }}
         />
@@ -158,7 +152,7 @@ const Categorypage = () => {
       })
       .then((res) => {
         setCategoryData(res.data.data);
-        console.log(res.data);
+        // console.log(res.data);
       });
   }
 
@@ -228,8 +222,6 @@ const Categorypage = () => {
                     <Button onClick={() => setModalState("Create")}>
                       Tambah Kategori
                     </Button>
-                    {/* <Button style={{marginRight:"0px", marginTop:"75px"}} class="btn-def_second" onClick={()=> setShow(!show)}>Unggah Resep</Button>
-                        <ModalConversion style={{color: "#000000"}} onClose={() => setShow(!show)} show={show} /> */}
                     <CategoryList
                       deleteCategory={deleteCategory}
                       Data={categoryData}
@@ -252,8 +244,6 @@ const Categorypage = () => {
                     <Button onClick={() => setModalState("Create")}>
                       Tambah Kategori
                     </Button>
-                    {/* <Button style={{marginRight:"0px", marginTop:"75px"}} class="btn-def_second" onClick={()=> setShow(!show)}>Unggah Resep</Button>
-                        <ModalConversion style={{color: "#000000"}} onClose={() => setShow(!show)} show={show} /> */}
                     <CategoryList
                       deleteCategory={deleteCategory}
                       Data={categoryData}

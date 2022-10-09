@@ -1,21 +1,15 @@
 import Axios from "axios";
 import React from "react";
-// import Register from "../../Assets/DevImage/Register.png";
-// import logo from "../../Assets/DevImage/LogoMedhika.png";
 import { API_URL } from "../../helper";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-// import { loginAction } from "../../Redux/Actions/userActions";
-import { useDisclosure, useToast } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { useToast } from "@chakra-ui/react";
 import { useToastHook } from "../CustomToast";
 import {
-  Flex,
   Box,
   Input,
   Text,
   Divider,
-  Spacer,
-  ButtonGroup,
   Button,
   Modal,
   ModalOverlay,
@@ -24,23 +18,16 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  FormControl,
-  FormLabel,
   TableContainer,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
 } from "@chakra-ui/react";
-import {
-  getProducts,
-  getProductActions,
-} from "../../Redux/Actions/productsAction";
+
 function ModalConversion(props) {
-  // const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [show, setShow] = React.useState(false);
@@ -57,21 +44,14 @@ function ModalConversion(props) {
       getProducts();
     }
   }, [props.idForConversion]);
-  // const { dataproduct } = useSelector((state) => {
-  //   console.log(state.productReducers,"test reducer")
-  //   return {
-  //     dataproduct: state.productReducers.product,
-  //   };
-  // });
-  // console.log("getProducts", dataproduct);
-  // console.log("KonversionQty", konversiQty);'
-  console.log(`props.idForConversion di modal conversion`,props.idForConversion)
+  
+  // console.log(`props.idForConversion di modal conversion`,props.idForConversion)
   const getProducts = async () => {
     if(props.idForConversion){
 
       try {
         let token = localStorage.getItem("tokenIdUser");
-        console.log("TOKENN PRODUCT JALAN", token);
+        // console.log("TOKENN PRODUCT JALAN", token);
         // memeriksa adanya token
         if (token) {
           let res = await Axios.post(
@@ -86,7 +66,7 @@ function ModalConversion(props) {
             }
           );
           if (res.data) {
-            console.log("RES DATA GETPRODUCTS", res.data);
+            // console.log("RES DATA GETPRODUCTS", res.data);
             SetDataproduct(res.data);
           }
         }
@@ -96,11 +76,11 @@ function ModalConversion(props) {
     }
 
   };
-  console.log(dataproduct,"===============");
+  
   const handleKonversi = async () => {
     try {
       let token = localStorage.getItem("tokenIdUser");
-      console.log("TOKENN PRODUCT JALAN", token);
+      // console.log("TOKENN PRODUCT JALAN", token);
       // memeriksa adanya token
       if (token) {
         let res = await Axios.post(
@@ -121,7 +101,7 @@ function ModalConversion(props) {
           }
         );
         if (res.data) {
-          console.log("RES DATA GETPRODUCTS KONVERSI", res.data);
+          // console.log("RES DATA GETPRODUCTS KONVERSI", res.data);
           SetDataproduct(res.data);
           props.handleStockChangesAfterConversion()
           setShow(!show)
@@ -131,17 +111,7 @@ function ModalConversion(props) {
       console.log(error);
     }
   };
-console.log(dataproduct,"test test")
-  // return(
-  //   <div>
-  //     <h1>
-  //       ini tes
-  //     </h1>
-  //     <h1>
-  //       {dataproduct.length > 0 && dataproduct[0].productName}
-  //     </h1>
-  //   </div>
-  // )
+  
   return (
     <>
       <Modal

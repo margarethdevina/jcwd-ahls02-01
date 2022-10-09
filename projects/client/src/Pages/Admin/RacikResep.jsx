@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useToastHook } from "../../Components/CustomToast";
 import Sidebar from "../../Components/Admin/Sidebar";
-import { getTransactionAdminAction, savedTransactionAdminAction } from "../../Redux/Actions/transactionActions";
+import { savedTransactionAdminAction } from "../../Redux/Actions/transactionActions";
 import ModalConversion from "../../Components/Admin/ModalConversion";
 import { API_URL, BE_URL } from "../../helper";
 import {
@@ -18,15 +18,7 @@ import {
   InputGroup,
   InputLeftAddon,
   Select,
-  FormControl,
-  FormHelperText,
-  FormErrorMessage
 } from "@chakra-ui/react";
-
-import { AiOutlineDelete } from "react-icons/ai";
-import { AiOutlineMinusSquare } from "react-icons/ai";
-import { AiOutlinePlusSquare } from "react-icons/ai";
-import { IoConstructOutline } from "react-icons/io5";
 
 const RacikResepPage = (props) => {
 
@@ -57,13 +49,6 @@ const RacikResepPage = (props) => {
   const [show, setShow] = useState(false);
   const [isError, setIsError] = useState([]);
 
-  // const { transactionList, transactionLength } = useSelector((state) => {
-  //   return {
-  //     transactionList: state.transactionReducers.adminvalidasiresep,
-  //     transactionLength: state.transactionReducers.transactionAdminView.filter(val => val.transactionStatus == "Menunggu Diproses Penjual").length
-  //   }
-  // })
-
   //& component did mount
   useEffect(() => {
     getDetail();
@@ -71,7 +56,7 @@ const RacikResepPage = (props) => {
   }, []);
 
   const getDetail = async () => {
-    console.log("isi search di getDetail", search);
+    // console.log("isi search di getDetail", search);
 
     let token = localStorage.getItem("tokenIdUser");
 
@@ -79,20 +64,20 @@ const RacikResepPage = (props) => {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then((response) => {
-        console.log("isi detail", response.data);
+        // console.log("isi detail", response.data);
         setDetail(response.data);
       })
       .catch((error) => { console.log(error) })
   };
 
-  console.log(`Detail Recipe`, detail);
-  console.log(`detail.idTransaction`, detail.idTransaction);
-  console.log(`detail.purchasedProducts`, detail.purchasedProducts);
+  // console.log(`Detail Recipe`, detail);
+  // console.log(`detail.idTransaction`, detail.idTransaction);
+  // console.log(`detail.purchasedProducts`, detail.purchasedProducts);
 
   const getAllProducts = async () => {
     Axios.get(`${API_URL}/transaction/adminGetAllProduct`)
       .then((response) => {
-        console.log("isi adminGetAllProduct", response.data);
+        // console.log("isi adminGetAllProduct", response.data);
         setAllProducts(response.data);
       })
       .catch((error) => {
@@ -119,11 +104,11 @@ const RacikResepPage = (props) => {
       subTotal: 0
     })
     setSelectedMeds(temp)
-    console.log(`selectedMeds`, selectedMeds)
+    // console.log(`selectedMeds`, selectedMeds)
   }
 
   const printProduct = () => {
-    console.log(`selectedMeds`, selectedMeds)
+    // console.log(`selectedMeds`, selectedMeds)
     if (selectedMeds.length > 0) {
       return selectedMeds.map((value, index) => {
         return (
@@ -215,7 +200,7 @@ const RacikResepPage = (props) => {
     setSelectedMeds(temp)
   }
 
-  console.log(`selectedMeds`, selectedMeds)
+  // console.log(`selectedMeds`, selectedMeds)
 
   const handlePurchaseQuantity = (e, idx) => {
     let temp = [...selectedMeds]
@@ -233,9 +218,9 @@ const RacikResepPage = (props) => {
   const handleKonversi = (value, index) => {
     if (value.idProduct) {
       setShow(!show)
-      console.log(`handleKonversi diklik`)
+      // console.log(`handleKonversi diklik`)
       setIdForConversion(value.idProduct)
-      console.log(`idForConversion`, idForConversion)
+      // console.log(`idForConversion`, idForConversion)
     } else {
       newToast({
         title: `Produk belum terpilih`,
@@ -245,7 +230,7 @@ const RacikResepPage = (props) => {
     }
   }
 
-  console.log(`idForConversion`, idForConversion);
+  // console.log(`idForConversion`, idForConversion);
 
   const handleMaxQuantity = () => {
     let temp = [...isError]
@@ -254,17 +239,17 @@ const RacikResepPage = (props) => {
         if (selectedMeds.filter(val => val.purchaseQuantity == undefined).length == 0) {
 
           if (valueSelectedMeds.idStock == valueAllProduct.idStock) {
-            console.log(`valueSelectedMeds.idStock == valueAllProduct.idStock`, valueSelectedMeds.idStock, valueAllProduct.idStock)
+            // console.log(`valueSelectedMeds.idStock == valueAllProduct.idStock`, valueSelectedMeds.idStock, valueAllProduct.idStock)
 
-            console.log(`selectedMeds.purchaseQuantity, valueAllProduct.stockQuantity`, valueSelectedMeds.purchaseQuantity, valueAllProduct.stockQuantity)
+            // console.log(`selectedMeds.purchaseQuantity, valueAllProduct.stockQuantity`, valueSelectedMeds.purchaseQuantity, valueAllProduct.stockQuantity)
 
             if (parseInt(valueSelectedMeds.purchaseQuantity) > parseInt(valueAllProduct.stockQuantity)) {
-              console.log(`valueSelectedMeds.purchaseQuantity > valueAllProduct.stockQuantity`)
+              // console.log(`valueSelectedMeds.purchaseQuantity > valueAllProduct.stockQuantity`)
 
               temp.push(false)
 
             } else if (parseInt(valueSelectedMeds.purchaseQuantity) <= parseInt(valueAllProduct.stockQuantity)) {
-              console.log(`valueSelectedMeds.purchaseQuantity <= valueAllProduct.stockQuantity`)
+              // console.log(`valueSelectedMeds.purchaseQuantity <= valueAllProduct.stockQuantity`)
 
               temp.push(true)
             }
@@ -287,9 +272,9 @@ const RacikResepPage = (props) => {
         if (selectedMeds.filter(val => val.purchaseQuantity == 0).length == 0) {
           handleMaxQuantity();
           if (!isError.includes(val => val == true)) {
-            console.log(`isError di btnSubmit karena dianggap false`, isError)
+            // console.log(`isError di btnSubmit karena dianggap false`, isError)
             try {
-              console.log(`isi selectedMeds sebelum submit`, selectedMeds);
+              // console.log(`isi selectedMeds sebelum submit`, selectedMeds);
               let token = localStorage.getItem("tokenIdUser");
               if (token) {
                 let res = await Axios.post(`${API_URL}/transaction/adminAddTransactionDetailForRecipe`, { selectedMeds, idUser: detail.idUser, idTransaction: search.split("=")[1] }, {
@@ -297,7 +282,7 @@ const RacikResepPage = (props) => {
                     'Authorization': `Bearer ${token}`
                   }
                 });
-                console.log("data yg teregister", res.data)
+                // console.log("data yg teregister", res.data)
                 getTransactionAdminAction();
                 setAddProductClicked(0);
                 navigate("/admin/transactionList");
@@ -307,7 +292,7 @@ const RacikResepPage = (props) => {
               console.log(error);
             }
           } else if (isError.includes(val => val == true)) {
-            console.log(`isError di btnSubmit karena dianggap true`, isError)
+            // console.log(`isError di btnSubmit karena dianggap true`, isError)
             newToast({
               title: `Informasi tidak lengkap`,
               description: "Ada produk yang belum diisi kuantitinya",
@@ -343,7 +328,7 @@ const RacikResepPage = (props) => {
         let token = localStorage.getItem("tokenIdUser");
 
         //^ cek ada token atau tidak
-        console.log(`getTransactionAdminAction tokenIdUser`, token);
+        // console.log(`getTransactionAdminAction tokenIdUser`, token);
 
         if (token) {
           let res = await Axios.get(`${API_URL}/transaction/adminGetAllTransaction`, {
@@ -353,7 +338,7 @@ const RacikResepPage = (props) => {
           })
 
           //^ cek isi res.data
-          console.log(`res.data getTransactionAdminAction`, res.data);
+          // console.log(`res.data getTransactionAdminAction`, res.data);
 
           dispatch(savedTransactionAdminAction(res.data));
         }

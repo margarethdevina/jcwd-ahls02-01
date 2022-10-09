@@ -3,14 +3,12 @@ import React from "react";
 import { API_URL, BE_URL } from "../../helper";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { useDisclosure, useToast, useEditableControls } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { loginAction } from "../../Redux/Actions/userActions";
-import { Text, Button, Input, Box, Image, InputGroup, Flex, Spinner, IconButton, Editable, EditablePreview, EditableInput,
+import { Text, Button, Input, Box, Flex, Spinner,
           ButtonGroup, Select, useMediaQuery, FormControl, FormLabel, Textarea, Checkbox, Spacer, Divider} from '@chakra-ui/react';
 import { FaRegEdit } from 'react-icons/fa';
-import { HiCheck } from 'react-icons/hi';
 import { IoMdAdd } from 'react-icons/io';
-import { IoClose } from 'react-icons/io5';
 import NavbarComponent from "../../Components/Users/Navbar";
 import { useToastHook } from "../../Components/CustomToast";
 import { getAddress, getAddressActions } from "../../Redux/Actions/addressActions";
@@ -213,7 +211,6 @@ const handleEditProfile=async()=>{
             setLoadingStat(false)
           }
           else if(nameEdit != "" || emailEdit !="" || genderEdit !="" || birthDateEdit !=""){
-            // if (emailEdit !=""){
               // console.log("EMAILEDIT KE ISI JALAN")
               if (emailEdit.includes("@")){
                 // console.log("previewPost false 1");
@@ -229,7 +226,6 @@ const handleEditProfile=async()=>{
                   }
                 });
                 if (res.data) {
-                  // {handleProfilePicture()};
                   localStorage.setItem("tokenIdUser", res.data.token);
                   dispatch(loginAction(res.data));
                   setEditProfile(!editProfile);
@@ -258,7 +254,6 @@ const handleEditProfile=async()=>{
                   }
                 });
                 if (res.data) {
-                  // {handleProfilePicture()};
                   localStorage.setItem("tokenIdUser", res.data.token);
                   dispatch(loginAction(res.data));
                   setEditProfile(!editProfile);
@@ -358,14 +353,12 @@ const handleEditProfile=async()=>{
         // console.log("====addProvinsiId func", addProvinsiId)
         if (addProvinsiId > 0){
           let a = addProvinsiId
-          // let b = !getCityOn
           let city = getCityRajaOngkir(a)
           dispatch(city)
           if (getCity){
             setAddKotaId(e.target.value)
             {getProvinceRajaOngkir2()}
           }
-          // setGetCityOn(!getCityOn)
         } else {
           alert("else")
         }
@@ -503,7 +496,7 @@ const handleEditProfile=async()=>{
   }
 
   // console.log("check ADD ADDRESS BARU", addLabel, addAlamat, getProvince2, addProvinsiId, getCity2, addKotaId, addPenerima, addTelfon, addKodePos)
-  console.log("======check file foto", file)
+  // console.log("======check file foto", file)
   // console.log("edit value", nameEdit, emailEdit, genderEdit, birthDateEdit)
 
   return (
@@ -725,7 +718,6 @@ const handleEditProfile=async()=>{
                           </div>
                         </div>
                       </div>
-                      {/* <div class="col-md-1"></div> */}
                       </>
                       :
                       <>

@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Axios from 'axios';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
-import NavbarComponent from "./Navbar";
-import { useToastHook } from "../CustomToast";
-import { API_URL, BE_URL } from "../../helper";
-import { savedUserValidasiResepAction, getUserValidasiResepAction, getUserFilterValidasiResepAction } from "../../Redux/Actions/transactionActions";
+import { BE_URL } from "../../helper";
+import { getUserValidasiResepAction, getUserFilterValidasiResepAction } from "../../Redux/Actions/transactionActions";
 import {
     Box,
     Image,
     Text,
-    Divider,
-    Button,
     ButtonGroup,
 } from "@chakra-ui/react";
 
@@ -38,9 +32,9 @@ const TransCardValidasiResepComponent = (props) => {
     }, [props.query])
 
     //^ cek props, state
-    console.log(`props.query`, props.query)
-    console.log(`transactionList`, transactionList);
-    console.log(`transactionLength`, transactionLength);
+    // console.log(`props.query`, props.query)
+    // console.log(`transactionList`, transactionList);
+    // console.log(`transactionLength`, transactionLength);
 
     const getArrayFilteredSortedTransaction = () => {
         dispatch(getUserFilterValidasiResepAction(props.query))
@@ -58,8 +52,8 @@ const TransCardValidasiResepComponent = (props) => {
 
     const printBtnPagination = () => {
         let btn = []
-        console.log(`transactionLength di printBtnPagination`, transactionLength);
-        console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        // console.log(`transactionLength di printBtnPagination`, transactionLength);
+        // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
         for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
             btn.push(
                 <Box
@@ -99,7 +93,7 @@ const TransCardValidasiResepComponent = (props) => {
     }
 
     //^ cek kiriman dbValidasiResep dari page parent / TransactionList
-    console.log(`props.dbValidasiResep`, props.dbValidasiResep)
+    // console.log(`props.dbValidasiResep`, props.dbValidasiResep)
 
     const printSemuaTransaksi = () => {
         if (transactionList.length > 0) {
@@ -178,21 +172,6 @@ const TransCardValidasiResepComponent = (props) => {
                                         Menunggu Pembayaran
                                     </span>
                                 </Text>
-                                {/* <Divider /> */}
-                                {/* <Box
-                                    display='flex'
-                                    alignItems='center'
-                                    justifyContent='end'
-                                    mt={3}
-                                >
-                                    <Button
-                                        className="btn-def"
-                                        width={160}
-                                        onClick={() => btnBatalkanPesanan(value.idTransaction, "Dibatalkan")}
-                                    >
-                                        Batalkan Pesanan
-                                    </Button>
-                                </Box> */}
                             </div>
                         </div>
                     )

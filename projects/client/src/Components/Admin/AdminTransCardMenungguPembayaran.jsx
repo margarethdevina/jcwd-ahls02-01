@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Axios from 'axios';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
-import NavbarComponent from "../../Components/Users/Navbar";
-import { useToastHook } from "../../Components/CustomToast";
-import { API_URL, BE_URL } from "../../helper";
+import { useNavigate } from "react-router-dom";
+import { BE_URL } from "../../helper";
 import { getAdminMenungguPembayaranAction, getAdminFilterMenungguPembayaranAction } from "../../Redux/Actions/transactionActions";
 import {
     Box,
     Image,
     Text,
-    Button,
     ButtonGroup
 } from "@chakra-ui/react";
 
@@ -38,9 +34,9 @@ const AdminTransCardMenungguPembayaranComponent = (props) => {
     }, [props.query])
 
     //^ cek props, state
-    console.log(`props.query`, props.query)
-    console.log(`transactionList`, transactionList);
-    console.log(`transactionLength`, transactionLength);
+    // console.log(`props.query`, props.query)
+    // console.log(`transactionList`, transactionList);
+    // console.log(`transactionLength`, transactionLength);
 
     const getArrayFilteredSortedTransaction = () => {
         dispatch(getAdminFilterMenungguPembayaranAction(props.query))
@@ -58,8 +54,8 @@ const AdminTransCardMenungguPembayaranComponent = (props) => {
 
     const printBtnPagination = () => {
         let btn = []
-        console.log(`transactionLength di printBtnPagination`, transactionLength);
-        console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        // console.log(`transactionLength di printBtnPagination`, transactionLength);
+        // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
         for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
             btn.push(
                 <Box
@@ -227,34 +223,7 @@ const AdminTransCardMenungguPembayaranComponent = (props) => {
                                 mt={2}
                                 mb={3}
                             >
-                                {/* <Button
-                                    className="btn-def_second"
-                                    onClick={() => btnUploadBuktiBayar(value.idTransaction)}
-                                >
-                                    Upload Bukti Bayar
-                                </Button> */}
                             </Box>
-
-                            {/* <Text
-                                fontSize={15}
-                                className='font-brand'
-                            >
-                                <span
-                                    className="me-1"
-                                >
-                                    *) Bukti bayar harus diunggah
-                                </span>
-                                <span
-                                    className="me-1"
-                                    style={{ color: 'var(--colorSix)' }}
-                                >
-                                    maksimal 1 hari dari tanggal pembayaran
-                                </span>
-                                <span
-                                >
-                                    , bila melewati batas waktu maka pesanan otomatis dibatalkan.
-                                </span>
-                            </Text> */}
 
                             <Text
                                 fontSize={15}

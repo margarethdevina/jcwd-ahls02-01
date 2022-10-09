@@ -3,7 +3,6 @@ import React from "react";
 import { API_URL, BE_URL } from "../../helper";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartAction } from "../../Redux/Actions/cartActions";
-// import { forgotPassword } from "../redux/action/usersAction";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Text,
@@ -20,11 +19,9 @@ import {
   MenuItem,
   MenuGroup,
   Input,
-  ButtonGroup,
 } from "@chakra-ui/react";
 import NavbarComponent from "../../Components/Users/Navbar";
 import { useToastHook } from "../../Components/CustomToast";
-import obat1 from "../../Assets/DevImage/Panadol.jpg";
 
 const ProductList = (props) => {
   const [productData, setProductData] = React.useState([]);
@@ -58,20 +55,19 @@ const ProductList = (props) => {
       name: filterData.name,
     }).then((res) => {
       setProductData(res.data.data);
-      console.log(res.data);
+      // console.log(res.data);
     });
   };
   function hdnFilter(filterStruct) {
     setFilterData(filterStruct);
   }
   const fetchCategoryList = () => {
-    let token = localStorage.getItem("tokenIdUser");
     Axios.get(`${API_URL}/users/getCategoryList`, {}).then((res) => {
       setCategoryList([
         { idCategory: "", categoryName: "ALL" },
         ...res.data.data,
       ]);
-      console.log(res.data);
+      // console.log(res.data);
     });
   };
 
@@ -85,7 +81,7 @@ const ProductList = (props) => {
   });
 
   //^ check isi databaseCart
-  console.log(`databaseCart di productlist`, databaseCart);
+  // console.log(`databaseCart di productlist`, databaseCart);
 
   const [indexSelectedProduct, setIndexSelectedProduct] = React.useState(null);
 
@@ -97,7 +93,7 @@ const ProductList = (props) => {
       let token = localStorage.getItem("tokenIdUser");
 
       //^ cek ada token atau tidak
-      console.log(`btnCheckout tokenIdUser`, token);
+      // console.log(`btnCheckout tokenIdUser`, token);
 
       if (token) {
         if (isVerified == "verified") {
@@ -118,7 +114,7 @@ const ProductList = (props) => {
             );
 
             if (res.data) {
-              console.log("isi res.data saat btnCart diklik", res.data);
+              // console.log("isi res.data saat btnCart diklik", res.data);
               dispatch(getCartAction());
               setLoadingStat(false);
               navigate("/cart");
@@ -147,7 +143,7 @@ const ProductList = (props) => {
             );
 
             if (res.data) {
-              console.log("isi res.data saat btnCart diklik", res.data);
+              // console.log("isi res.data saat btnCart diklik", res.data);
               dispatch(getCartAction());
               setLoadingStat(false);
               navigate("/cart");
@@ -173,7 +169,6 @@ const ProductList = (props) => {
   };
 
   const printProduct = (value, index) => {
-    // return product.map((value, index) =>{
     return (
       <>
         <div class="d-inline-flex">
@@ -209,7 +204,7 @@ const ProductList = (props) => {
                   class="h6"
                   style={{ marginTop: "40px", marginLeft: "20px" }}
                 >
-                  Rp.{value.priceSale}/ {value.defaultUnit}
+                  Rp {value.priceSale.toLocaleString()} / {value.defaultUnit}
                 </Text>
               </div>
             </div>
@@ -231,11 +226,9 @@ const ProductList = (props) => {
         </div>
       </>
     );
-    // })
   };
 
   const printCategory = (value, index) => {
-    // return category.map((value, index) =>{
     return (
       <>
         <Box
@@ -251,7 +244,6 @@ const ProductList = (props) => {
         </Box>
       </>
     );
-    // })
   };
 
   return (

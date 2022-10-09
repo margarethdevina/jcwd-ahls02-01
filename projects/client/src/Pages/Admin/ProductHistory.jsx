@@ -1,13 +1,8 @@
-import Axios from "axios";
 import React from "react";
-import {Bar, Line} from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
-import { API_URL } from "../../helper";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
-import { Text, useMediaQuery, Box, Button, ButtonGroup, Spinner, Flex, Divider, TableContainer, Table, TableCaption, Thead, Tbody, Tfoot,
+import { useNavigate } from "react-router-dom";
+import { Text, useMediaQuery, Box, Button, ButtonGroup, Spinner, Flex, Divider, TableContainer, Table, Thead, Tbody, 
         Tr, Th, Td, Input, Spacer, Menu, MenuButton, MenuList, MenuItem, MenuDivider} from '@chakra-ui/react';
-import logo2 from "../../Assets/DevImage/LogoMedhikaPutih.png";
 import Sidebar from "../../Components/Admin/Sidebar";
 import { getProductHistoryPaginateAction, getSearchProductHistoryPaginateAction, getSortTanggalASCPaginateAction,
         getSortTanggalDSCPaginateAction, getFilterProductHistoryPaginateAction} from "../../Redux/Actions/productHistoryActions";
@@ -48,7 +43,7 @@ const ProductHistory=(props)=>{
   }, [])
   
   const getPaginatedProdukHistory = (page = 0) => {
-    console.log("getProduct else jalannn")
+    // console.log("getProduct else jalannn")
         dispatch(getProductHistoryPaginateAction(page + 1))
   }
 
@@ -276,14 +271,13 @@ const printBtnPagination = () => {
       }
       return btn;
     }
-    // console.log(`transactionLength di printBtnPagination`, transactionLength);
 }
 
   const handleSortTanggalASC =async()=>{
     try {
       setSortirTanggalDSC(false)
       setSortirTanggalASC(true)
-      console.log("SORTIR TANGGAL ASC JALANNNNNN")
+      // console.log("SORTIR TANGGAL ASC JALANNNNNN")
       {getPaginatedSortTanggalASC()}
       } catch (err) {
     }
@@ -293,7 +287,7 @@ const printBtnPagination = () => {
     try {
       setSortirTanggalASC(false)
       setSortirTanggalDSC(true)
-      console.log("SORTIR TANGGAL DSC JALANNNNNN")
+      // console.log("SORTIR TANGGAL DSC JALANNNNNN")
       {getPaginatedSortTanggalDSC()}
       } catch (err) {
     }
@@ -493,7 +487,7 @@ const handleSearch =async()=>{
   try {
     if(searchProduk){
         setSearchOn(true)
-        console.log("searchOn JALANNNNNN")
+        // console.log("searchOn JALANNNNNN")
         getPaginatedSearch()
       }
     } catch (err) {
@@ -504,7 +498,7 @@ const handleFilter =async()=>{
   try {
     if(filterTanggalAwal && filterTanggalAkhir){
         setFilterOn(true)
-        console.log("filterOn JALANNNNNN")
+        // console.log("filterOn JALANNNNNN")
         getPaginatedFilter()
       }
     } catch (err) {

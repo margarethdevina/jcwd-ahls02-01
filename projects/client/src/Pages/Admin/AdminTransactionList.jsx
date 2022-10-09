@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToastHook } from "../../Components/CustomToast";
 import AdminTransCardValidasiResepComponent from "../../Components/Admin/AdminTransCardValidasiResep";
 import AdminTransCardMenungguPembayaranComponent from "../../Components/Admin/AdminTransCardMenungguPembayaran";
@@ -17,13 +16,6 @@ import {
     Divider,
     Text,
     Button,
-    ButtonGroup,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
     Input,
     InputGroup,
     InputLeftAddon,
@@ -49,7 +41,6 @@ const AdminTransactionListPage = (props) => {
     const [filterDateEnd, setFilterDateEnd] = useState("");
     const [tabIndex, setTabIndex] = useState(0);
     const [queryFilterSort, setQueryFilterSort] = useState("");
-    // const { state, search } = useLocation();
 
     //& component did mount
     useEffect(() => {
@@ -64,13 +55,9 @@ const AdminTransactionListPage = (props) => {
         }
     })
 
-    const handleTabIndex = (idx) => {
-        setTabIndex(idx);
-    }
-
     //& untuk ambil BE transaksi yang terpaginate dan tersortir
     const handleSortDropdown = (sortValue) => {
-        console.log(`dropdown yang terpilih ${sortValue}`);
+        // console.log(`dropdown yang terpilih ${sortValue}`);
 
         if (sortValue != "null") {
             setOrderData(sortValue);
@@ -79,48 +66,47 @@ const AdminTransactionListPage = (props) => {
 
     const btnFilterSort = () => {
 
-        console.log(`===ISI BTN FILTER SORT====`)
+        // console.log(`===ISI BTN FILTER SORT====`)
         //^check isi handle filter dan sort
-        console.log(`isi filterDateBegin ${filterDateBegin}`);
-        console.log(`isi filterDateEnd ${filterDateEnd}`);
-        console.log(`isi filterInvoice ${filterInvoice}`);
+        // console.log(`isi filterDateBegin ${filterDateBegin}`);
+        // console.log(`isi filterDateEnd ${filterDateEnd}`);
+        // console.log(`isi filterInvoice ${filterInvoice}`);
         let _sortBy = orderData.split('-')[0];
         if (_sortBy == "invoiceNumber") {
             _sortBy = "t1.invoiceNumber"
         } else {
             _sortBy = "t1.addDate"
         }
-        console.log(`isi _sortBy ${_sortBy}`);
+        // console.log(`isi _sortBy ${_sortBy}`);
 
         let _order = orderData.split('-')[1];
-        console.log(`isi _order ${_order}`);
+        // console.log(`isi _order ${_order}`);
 
-        //TODO query filter dan sort
         let query = '?';
         if (_sortBy && _order) {
             if (filterInvoice) {
                 if (filterDateBegin && filterDateEnd) {
                     // ^ ===FILTER CONDITION 1 SORT, INV, DATE===
-                    console.log(`===FILTER CONDITION 1 SORT, INV, DATE===`);
+                    // console.log(`===FILTER CONDITION 1 SORT, INV, DATE===`);
 
                     query += `_filterInvoice=${filterInvoice}&_dateGte=${filterDateBegin}&_dateLte=${filterDateEnd}&_sortBy=${_sortBy}&_order=${_order}`;
 
                 } else {
                     // ^ ===FILTER CONDITION 2 SORT, INV===
-                    console.log(`===FILTER CONDITION 2 SORT, INV===`);
+                    // console.log(`===FILTER CONDITION 2 SORT, INV===`);
 
                     query += `_filterInvoice=${filterInvoice}&_sortBy=${_sortBy}&_order=${_order}`;
 
                 }
             } else if (filterDateBegin && filterDateEnd) {
                 // ^ ===FILTER CONDITION 3 SORT, DATE===
-                console.log(`===FILTER CONDITION 3 SORT, DATE===`);
+                // console.log(`===FILTER CONDITION 3 SORT, DATE===`);
 
                 query += `_dateGte=${filterDateBegin}&_dateLte=${filterDateEnd}&_sortBy=${_sortBy}&_order=${_order}`;
 
             } else {
                 // ^ ===FILTER CONDITION 4 SORT===
-                console.log(`===FILTER SORT CONDITION 4 SORT===`);
+                // console.log(`===FILTER SORT CONDITION 4 SORT===`);
 
                 query += `_sortBy=${_sortBy}&_order=${_order}`;
 
@@ -128,26 +114,26 @@ const AdminTransactionListPage = (props) => {
         } else {
             if (filterDateBegin && filterDateEnd && filterInvoice) {
                 // ^ ===FILTER CONDITION 5 DATE INV ===
-                console.log(`===FILTER CONDITION 5 DATE INV ===`);
+                // console.log(`===FILTER CONDITION 5 DATE INV ===`);
 
                 query += `_filterInvoice=${filterInvoice}&_dateGte=${filterDateBegin}&_dateLte=${filterDateEnd}`;
 
             } else if (filterDateBegin && filterDateEnd) {
                 // ^ ===FILTER CONDITION 6 DATE===
-                console.log(`===FILTER CONDITION 6 DATE===`);
+                // console.log(`===FILTER CONDITION 6 DATE===`);
 
                 query += `_dateGte=${filterDateBegin}&_dateLte=${filterDateEnd}`;
 
             } else if (filterInvoice) {
                 // ^ ===FILTER CONDITION 7 INV===
-                console.log(`===FILTER CONDITION 7 INV===`);
+                // console.log(`===FILTER CONDITION 7 INV===`);
 
                 query += `_filterInvoice=${filterInvoice}`;
 
             }
         }
 
-        console.log(`query jadinya gmn?`, query)
+        // console.log(`query jadinya gmn?`, query)
         setQueryFilterSort(query);
         return query;
     }

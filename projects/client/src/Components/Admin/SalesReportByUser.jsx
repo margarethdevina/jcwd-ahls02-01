@@ -1,9 +1,7 @@
-import Axios from "axios";
 import React from "react";
-import { API_URL } from "../../helper";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
-import { Text, useMediaQuery, Box, Button, ButtonGroup, Spinner, Flex, Divider, TableContainer, Table, TableCaption, Thead, Tbody, Tfoot,
+import { useNavigate } from "react-router-dom";
+import { Text, Box, Button, ButtonGroup, Spinner, Flex, TableContainer, Table, Thead, Tbody, 
         Tr, Th, Td, Input, Menu, MenuButton, MenuList, MenuItem, Spacer, MenuDivider} from '@chakra-ui/react';
 import { getUserSalesReportPaginateAction, getSearchUserPaginateAction, getUserTotalASCPaginateAction, getUserTotalDSCPaginateAction } from '../../Redux/Actions/salesReportUserActions'
 
@@ -37,12 +35,11 @@ const SalesReportByUser=(props)=>{
 })
 
   React.useEffect(()=>{
-    // getLaporanUser()
     getPaginatedUserSalesReport()
   }, [])
 
   const getPaginatedUserSalesReport = (page = 0) => {
-    console.log("getUserss else jalannnnnnn")
+    // console.log("getUserss else jalannnnnnn")
         dispatch(getUserSalesReportPaginateAction(page + 1))
   }
 
@@ -79,7 +76,7 @@ const SalesReportByUser=(props)=>{
     try {
       setSortirTotalDSC(false)
       setSortirTotalASC(true)
-      console.log("SORTIR TOTAL ASC JALANNNNNN")
+      // console.log("SORTIR TOTAL ASC JALANNNNNN")
       {getPaginatedUserTotalASC()}
       } catch (err) {
     }
@@ -89,7 +86,7 @@ const SalesReportByUser=(props)=>{
     try {
       setSortirTotalASC(false)
       setSortirTotalDSC(true)
-      console.log("SORTIR TOTAL DSC JALANNNNNN")
+      // console.log("SORTIR TOTAL DSC JALANNNNNN")
       {getPaginatedUserTotalDSC()}
       } catch (err) {
     }
@@ -99,7 +96,7 @@ const handleSearch =async()=>{
   try {
     if(searchUser){
         setSearchOn(true)
-        console.log("searchOn JALANNNNNN")
+        // console.log("searchOn JALANNNNNN")
         getPaginatedSearchUser()
       }
     } catch (err) {
@@ -220,7 +217,6 @@ const printBtnPagination = () => {
   }
   return btn;
   } else {
-    // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(userSalesReportPaginateLength) / 10);
     for (let i = 0; i < Math.ceil(userSalesReportPaginateLength / 10); i++) {
         btn.push(
             <Box
@@ -316,7 +312,7 @@ const printBtnPagination = () => {
         )
       } else {
         return userSalesTotalASCPaginate.map((value, index)=>{
-          console.log("VALUEEEE", value)
+          // console.log("VALUEEEE", value)
           if (index % 2 == 0){
             return (
               <Tr>

@@ -1,10 +1,8 @@
-import Axios from "axios";
 import React from "react";
-import { API_URL } from "../../helper";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
-import { Text, useMediaQuery, Box, Button, ButtonGroup, Flex, Divider, Spinner, TableContainer, Table, TableCaption, Thead, Tbody, Tfoot,
-        Tr, Th, Td, Image, Input, Menu, MenuButton, MenuList, MenuItem, Spacer, MenuDivider} from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
+import { Text, Box, Button, ButtonGroup, Flex, Spinner, TableContainer, Table, Thead, Tbody, Tr, Th, Td, 
+  Input, Menu, MenuButton, MenuList, MenuItem, Spacer, MenuDivider} from '@chakra-ui/react';
 import { useToastHook } from "../../Components/CustomToast";
 import { getSalesInvoicePaginateAction, getSearchSalesInvoicePaginateAction, getFilterSalesInvoicePaginateAction, getInvoiceTanggalASCPaginateAction,
     getInvoiceTanggalDSCPaginateAction, getInvoiceTotalASCPaginateAction, getInvoiceTotalDSCPaginateAction } from "../../Redux/Actions/salesReportInvoiceActions"
@@ -61,7 +59,7 @@ const SalesReportByTransaction=(props)=>{
   }, [])
 
   const getPaginatedSalesReportInvoice = (page = 0) => {
-    console.log("getInvoice else jalannn")
+    // console.log("getInvoice else jalannn")
         dispatch(getSalesInvoicePaginateAction(page + 1))
   }
 
@@ -123,7 +121,7 @@ const handleSortTotalASC =async()=>{
     setSortirTanggalASC(false)
     setSortirTanggalDSC(false)
     setSortirTotalASC(true)
-    console.log("SORTIR TOTAL ASC JALANNNNNN")
+    // console.log("SORTIR TOTAL ASC JALANNNNNN")
     {getPaginatedInvoiceTotalASC()}
     } catch (err) {
   }
@@ -135,7 +133,7 @@ const handleSortTotalDSC =async()=>{
     setSortirTanggalASC(false)
     setSortirTanggalDSC(false)
     setSortirTotalDSC(true)
-    console.log("SORTIR TOTAL DSC JALANNNNNN")
+    // console.log("SORTIR TOTAL DSC JALANNNNNN")
     {getPaginatedInvoiceTotalDSC()}
     } catch (err) {
   }
@@ -146,7 +144,7 @@ const handleSortTanggalASC =async()=>{
     setSortirTotalDSC(false)
     setSortirTanggalDSC(false)
     setSortirTanggalASC(true)
-    console.log("SORTIR TANGGAL ASC JALANNNNNN")
+    // console.log("SORTIR TANGGAL ASC JALANNNNNN")
     {getPaginatedInvoiceTanggalASC()}
     } catch (err) {
   }
@@ -154,18 +152,18 @@ const handleSortTanggalASC =async()=>{
 
 const handleSortTanggalDSC =async()=>{
   try {
-    console.log("sortir tanggal DSC JALAN")
+    // console.log("sortir tanggal DSC JALAN")
     setSortirTotalASC(false)
     setSortirTotalDSC(false)
     setSortirTanggalASC(false)
     setSortirTanggalDSC(true)
-    console.log("SORTIR TANGGAL DSC JALANNNNNN")
+    // console.log("SORTIR TANGGAL DSC JALANNNNNN")
     {getPaginatedInvoiceTanggalDSC()}
     } catch (err) {
   }
 }
 
-console.log("math.ceil",salesInvoiceTanggalASCPaginateLength)
+// console.log("math.ceil",salesInvoiceTanggalASCPaginateLength)
 const printBtnPagination = () => {
   let btn = []
   if (searchOn == true){
@@ -685,7 +683,7 @@ const printBtnPagination = () => {
     try {
       if(searchInvoice){
         setSearchOn(true)
-        console.log("searchOn JALANNNNNN")
+        // console.log("searchOn JALANNNNNN")
         getPaginatedSearchInvoice()
         }
       } catch (err) {
@@ -696,7 +694,7 @@ const printBtnPagination = () => {
     try {
       if(filterTanggalAwal && filterTanggalAkhir){
         setFilterOn(true)
-        console.log("filterOn JALANNNNNN")
+        // console.log("filterOn JALANNNNNN")
         getPaginatedFilterInvoice()
         }
       } catch (err) {

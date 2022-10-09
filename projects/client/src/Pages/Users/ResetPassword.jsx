@@ -5,8 +5,7 @@ import { Button, Text, Box, Input, Progress, InputGroup, InputRightElement, Imag
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
 import { IoIosWarning } from "react-icons/io";
-import { useDisclosure, useToast } from '@chakra-ui/react';
-import { loginAction } from "../../Redux/Actions/userActions";
+import { useToast } from '@chakra-ui/react';
 import { logoutAction } from "../../Redux/Actions/userActions";
 import NavbarComponent from "../../Components/Users/Navbar";
 import { useToastHook } from "../../Components/CustomToast";
@@ -41,8 +40,8 @@ const ResetPassword=(props)=>{
 
   const getTokens= async ()=>{
     try {
-      console.log("getTokens jalan");
-      console.log("params",params.token);
+      // console.log("getTokens jalan");
+      // console.log("params",params.token);
       if (params.token) {
         let res = await Axios.post(`${API_URL}/users/getTokens`, {
           token: params.token
@@ -52,7 +51,7 @@ const ResetPassword=(props)=>{
           }
         })
         // memeriksa adanya data user atau tidak
-        console.log("RES.DATA.TOKEN verified", res.data)
+        // console.log("RES.DATA.TOKEN verified", res.data)
         if (res.data.message == "token valid") {
           //
           setBlacklist(true)
@@ -99,7 +98,7 @@ const ResetPassword=(props)=>{
           })
           setLoadingStat(false)
         } else {
-          console.log("reset password jalannnn")
+          // console.log("reset password jalannnn")
           let res = await Axios.patch(`${API_URL}/users/reset`, { newPassword: password },
           {
             headers: {
@@ -158,7 +157,7 @@ const ResetPassword=(props)=>{
   }
 
   const checkStrongPassword =()=>{
-    console.log(isUpperCase, containsNumbers, passwordLength)
+    // console.log(isUpperCase, containsNumbers, passwordLength)
     if(passwordLength== false || isUpperCase==false ||
       containsNumbers==false ){
         newToast({

@@ -3,28 +3,16 @@ import React from "react";
 import { API_URL, BE_URL } from "../../helper";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartAction } from "../../Redux/Actions/cartActions";
-// import { forgotPassword } from "../redux/action/usersAction";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Text,
   Box,
   Image,
   Button,
-  Flex,
   Divider,
-  Spacer,
-  MenuButton,
-  MenuList,
-  Menu,
-  MenuDivider,
-  MenuItem,
-  MenuGroup,
-  Input,
-  ButtonGroup,
 } from "@chakra-ui/react";
 import NavbarComponent from "../../Components/Users/Navbar";
 import { useToastHook } from "../../Components/CustomToast";
-import obat1 from "../../Assets/DevImage/Panadol.jpg";
 
 const ProductDetail = (props) => {
   const dispatch = useDispatch();
@@ -38,11 +26,10 @@ const ProductDetail = (props) => {
     dispatch(getCartAction());
   }, []);
   const fetchProductDetail = () => {
-    let token = localStorage.getItem("tokenIdUser");
     Axios.get(`${API_URL}/users/getproductdetail/${params.id}`, {
     }).then((res) => {
       setProductDetail(res.data.data[0]);
-      console.log(res.data);
+      // console.log(res.data);
     });
   };
 
@@ -54,7 +41,7 @@ const ProductDetail = (props) => {
   })
 
   //^ check isi databaseCart
-  console.log(`databaseCart di productlist`, databaseCart);
+  // console.log(`databaseCart di productlist`, databaseCart);
 
   const btnCart = async (idProduct, productName) => {
     try {
@@ -63,7 +50,7 @@ const ProductDetail = (props) => {
       let token = localStorage.getItem("tokenIdUser");
 
       //^ cek ada token atau tidak
-      console.log(`btnCheckout tokenIdUser`, token);
+      // console.log(`btnCheckout tokenIdUser`, token);
 
       if (token) {
 
@@ -80,7 +67,7 @@ const ProductDetail = (props) => {
             })
 
             if (res.data) {
-              console.log("isi res.data saat btnCart diklik", res.data);
+              // console.log("isi res.data saat btnCart diklik", res.data);
               dispatch(getCartAction());
               setLoadingStat(false);
               navigate("/cart");
@@ -104,7 +91,7 @@ const ProductDetail = (props) => {
             })
 
             if (res.data) {
-              console.log("isi res.data saat btnCart diklik", res.data);
+              // console.log("isi res.data saat btnCart diklik", res.data);
               dispatch(getCartAction());
               setLoadingStat(false);
               navigate("/cart");
@@ -136,7 +123,6 @@ const ProductDetail = (props) => {
       <Box
         w="100%"
         h="100%"
-      // bgGradient='linear(#f6f8fc, #FFFFFF)'
       >
         <Box boxShadow="md">
           <NavbarComponent />
@@ -158,7 +144,6 @@ const ProductDetail = (props) => {
               </div>
             </div>
             <div class="col-md-6">
-              {/* <Box borderRadius={"10px"} width="100%" height="180%" boxShadow='lg' bg='#FFFFFF' mt={"25px"} ml={"20px"} > */}
               <Box mt={"50px"}>
                 <Text class="h3b" style={{ marginLeft: "20px" }}>
                   {productDetail.productName}
@@ -167,7 +152,7 @@ const ProductDetail = (props) => {
                   class="h4"
                   style={{ marginTop: "20px", marginLeft: "20px" }}
                 >
-                  Rp.{productDetail.priceSale} / {productDetail.defaultUnit}
+                  Rp {productDetail.priceSale.toLocaleString()} / {productDetail.defaultUnit}
                 </Text>
               </Box>
               <div class="d-grid gap-2" style={{ marginLeft: "20px" }}>

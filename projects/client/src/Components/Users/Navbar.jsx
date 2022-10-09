@@ -1,17 +1,15 @@
 import React from "react";
 import Axios from "axios";
 import logo from "../../Assets/DevImage/LogoMedhika.png";
-import { Flex, Box, Heading, Input, Image, Spacer, ButtonGroup, Button, Link, Menu, MenuButton,
+import { Flex, Box, Image, Spacer, ButtonGroup, Button, Link, Menu, MenuButton,
   MenuGroup, MenuList, MenuDivider, MenuItem, Text, useMediaQuery, IconButton} from '@chakra-ui/react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { logoutAction } from "../../Redux/Actions/userActions";
 import Modal from "../../Components/Users/ModalLogin";
 import { API_URL, BE_URL } from "../../helper";
-import { IoCart, IoCloseCircle, IoMenuOutline } from 'react-icons/io5';
-import { FaUser, FaUserSlash, FaUserCircle } from 'react-icons/fa';
-import { loginAction } from "../../Redux/Actions/userActions";
+import { IoCart, IoMenuOutline } from 'react-icons/io5';
 import { useToastHook } from "../../Components/CustomToast";
 
 
@@ -41,10 +39,9 @@ const NavbarComponent = (props) => {
                   'Authorization': `Bearer ${token}`
               }
           })
-          console.log("resdata reverify",res.data.token)
+          // console.log("resdata reverify",res.data.token)
           if (res.data.token){
               localStorage.setItem("tokenIdUser", res.data.token)
-              // dispatch(loginAction(res.data))
               newToast({
                 title: 'Resend Verifikasi Berhasil.',
                 description:'Verifikasi akun anda dengan link yang ada di email',
@@ -87,9 +84,8 @@ const NavbarComponent = (props) => {
     }
   }
 
-    // console.log("SHOW Navb", show)
-    console.log("S T A T U S Navb", isVerified)
-    console.log("profilePicture", profilePicture)
+    // console.log("S T A T U S Navb", isVerified)
+    // console.log("profilePicture", profilePicture)
   return (
     <Box bg='white'>
       <div class="container">

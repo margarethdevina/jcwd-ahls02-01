@@ -1,12 +1,10 @@
-import Axios from "axios";
 import React from "react";
-import { API_URL } from "../../helper";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from "react-router-dom";
-import { Text, useMediaQuery, Box, Button, Spinner, ButtonGroup, Flex, Divider, Menu, MenuButton, MenuList, MenuItem, Tr, Td, Th,
-        Spacer, Image, Input, MenuDivider, TableContainer, Table, Thead, Tbody} from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
+import { Text, Box, Button, Spinner, ButtonGroup, Flex, Menu, MenuButton, MenuList, MenuItem, Tr, Td, Th,
+        Spacer, Input, MenuDivider, TableContainer, Table, Thead, Tbody} from '@chakra-ui/react';
 import { getSalesReportPaginateAction, getSearchSalesReportPaginateAction, getSortTotalASCPaginateAction,
-        getSortTotalDSCPaginateAction, getFilterProductHistoryPaginateAction} from "../../Redux/Actions/salesReportProductActions";
+        getSortTotalDSCPaginateAction, } from "../../Redux/Actions/salesReportProductActions";
 
 const SalesReportByProduct=(props)=>{
   const dispatch = useDispatch();
@@ -36,7 +34,7 @@ const SalesReportByProduct=(props)=>{
   }, [])
 
   const getPaginatedSalesReport = (page = 0) => {
-    console.log("getProduct else jalannnnnnn")
+    // console.log("getProduct else jalannnnnnn")
         dispatch(getSalesReportPaginateAction(page + 1))
   }
 
@@ -225,7 +223,7 @@ const handleSortTotalASC =async()=>{
   try {
     setSortirTotalDSC(false)
     setSortirTotalASC(true)
-    console.log("SORTIR TOTAL ASC JALANNNNNN")
+    // console.log("SORTIR TOTAL ASC JALANNNNNN")
     {getPaginatedSortTotalASC()}
     } catch (err) {
   }
@@ -235,7 +233,7 @@ const handleSortTotalDSC =async()=>{
   try {
     setSortirTotalASC(false)
     setSortirTotalDSC(true)
-    console.log("SORTIR TOTAL DSC JALANNNNNN")
+    // console.log("SORTIR TOTAL DSC JALANNNNNN")
     {getPaginatedSortTotalDSC()}
     } catch (err) {
   }
@@ -245,7 +243,7 @@ const handleSearch =async()=>{
   try {
     if(searchProduct){
       setSearchOn(true)
-      console.log("searchOn JALANNNNNN")
+      // console.log("searchOn JALANNNNNN")
       getPaginatedSearch()
     }
     } catch (err) {
@@ -391,7 +389,7 @@ const handleSearch =async()=>{
     setSortirTotalDSC(false)
   };
 
-  console.log("salesSortTotalDSCPaginate", salesReportPaginate)
+  // console.log("salesSortTotalDSCPaginate", salesReportPaginate)
   return( <>
     <div class="row mb-4 mt-4" style={{marginLeft:"10px", marginRight:"10px"}}>
       <div class="col-md-4">

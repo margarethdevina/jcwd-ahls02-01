@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
-import NavbarComponent from "../../Components/Users/Navbar";
-import { useToastHook } from "../../Components/CustomToast";
 import ModalPaymentProofComponent from "./ModalPaymentProof";
-import { getTransactionAction, getUserMenungguPembayaranAction, getUserFilterMenungguPembayaranAction, cancellingOrderAction } from "../../Redux/Actions/transactionActions";
-import { API_URL, BE_URL } from "../../helper";
+import { getUserMenungguPembayaranAction, getUserFilterMenungguPembayaranAction, cancellingOrderAction } from "../../Redux/Actions/transactionActions";
+import { BE_URL } from "../../helper";
 import {
     Box,
     Image,
@@ -39,7 +35,7 @@ const TransCardMenungguPembayaranComponent = (props) => {
     })
 
     //^ cek state isModalPaymentProofOpen
-    console.log(`isModalPaymentProofOpen`, isModalPaymentProofOpen);
+    // console.log(`isModalPaymentProofOpen`, isModalPaymentProofOpen);
     const [batalkanPesanan, setBatalkanPesanan] = useState(0);
     const [openModalPembatalan, setOpenModalPembatalan] = useState(false);
     const [idSoonBatal, setIdSoonBatal] = useState(null);
@@ -59,17 +55,9 @@ const TransCardMenungguPembayaranComponent = (props) => {
     }, [props.query, selectedTransaction, isModalPaymentProofOpen, isBtnUploadBuktiBayarClicked, batalkanPesanan])
 
     //^ cek props, state
-    console.log(`props.query`, props.query)
-    console.log(`transactionList`, transactionList);
-    console.log(`transactionLength`, transactionLength);
-
-    const openModalPaymentProof = () => {
-        if (isBtnUploadBuktiBayarClicked == 0) {
-            setIsModalPaymentProofOpen(false);
-        } else {
-            setIsModalPaymentProofOpen(true);
-        }
-    }
+    // console.log(`props.query`, props.query)
+    // console.log(`transactionList`, transactionList);
+    // console.log(`transactionLength`, transactionLength);
 
     //& onClick akan deteksi transaksinya beresep atau ngga, beresep akan minta user pilih metode bayar, ga beresep akan langsung minta user upload bukti bayar
     const btnUploadBuktiBayar = (selectedIdTransaction) => {
@@ -81,10 +69,9 @@ const TransCardMenungguPembayaranComponent = (props) => {
         setSelectedTransaction(transaction);
         setTotal(transaction.totalPayment);
 
-        console.log(`selectedTransaction`, selectedTransaction);
-        console.log(`transaction.totalPayment`, total);
+        // console.log(`selectedTransaction`, selectedTransaction);
+        // console.log(`transaction.totalPayment`, total);
 
-        //TODO axios untuk patch add multer gambar bukti bayar untuk transaksi yang diklik upload bukti bayar nya
     }
 
     const handleCallbackToChildPaymentProof = () => {
@@ -118,8 +105,8 @@ const TransCardMenungguPembayaranComponent = (props) => {
 
     const printBtnPagination = () => {
         let btn = []
-        console.log(`transactionLength di printBtnPagination`, transactionLength);
-        console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
+        // console.log(`transactionLength di printBtnPagination`, transactionLength);
+        // console.log(`Math.ceil(transactionLength)/3 di printBtnPagination`, Math.ceil(transactionLength) / 3);
         for (let i = 0; i < Math.ceil(transactionLength / 3); i++) {
             btn.push(
                 <Box
@@ -302,27 +289,6 @@ const TransCardMenungguPembayaranComponent = (props) => {
                                     Upload Bukti Bayar
                                 </Button>
                             </Box>
-
-                            {/* <Text
-                                fontSize={15}
-                                className='font-brand'
-                            >
-                                <span
-                                    className="me-1"
-                                >
-                                    *) Bukti bayar harus diunggah
-                                </span>
-                                <span
-                                    className="me-1"
-                                    style={{ color: 'var(--colorSix)' }}
-                                >
-                                    maksimal 1 hari dari tanggal pembayaran
-                                </span>
-                                <span
-                                >
-                                    , bila melewati batas waktu maka pesanan otomatis dibatalkan.
-                                </span>
-                            </Text> */}
 
                             <Text
                                 fontSize={15}

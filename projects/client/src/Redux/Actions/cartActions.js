@@ -1,10 +1,9 @@
 import Axios from "axios"
-// import { useNavigate } from "react-router-dom"
 import { API_URL } from "../../helper"
 
 //* storing cart info into reducer
 export const savedCartAction = (data) => {
-    console.log("data savedCartAction", data);
+    // console.log("data savedCartAction", data);
 
     return {
         type: "SAVED_CART",
@@ -20,7 +19,7 @@ export const getCartAction = () => {
             let token = localStorage.getItem("tokenIdUser");
 
             //^ cek ada token atau tidak
-            console.log(`getCartAction tokenIdUser`, token);
+            // console.log(`getCartAction tokenIdUser`, token);
 
             if (token) {
                 let res = await Axios.get(`${API_URL}/cart/getAllCart`, {
@@ -30,7 +29,7 @@ export const getCartAction = () => {
                 })
 
                 //^ cek isi res.data
-                console.log(`res.data`, res.data);
+                // console.log(`res.data`, res.data);
 
                 dispatch(savedCartAction(res.data));
             }
@@ -41,7 +40,7 @@ export const getCartAction = () => {
 }
 
 export const savedMainStockAction = (data) => {
-    console.log("data savedMainStockAction", data);
+    // console.log("data savedMainStockAction", data);
 
     return {
         type: "SAVED_MAIN_STOCK",
@@ -56,7 +55,7 @@ export const getAllMainStockAction = () => {
             let res = await Axios.get(`${API_URL}/cart/getAllMainStock`)
 
             //^ cek isi res.data
-            console.log(`res.data`, res.data);
+            // console.log(`res.data`, res.data);
 
             dispatch(savedMainStockAction(res.data));
 

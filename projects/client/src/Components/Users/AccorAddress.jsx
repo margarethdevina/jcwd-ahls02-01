@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToastHook } from "../CustomToast";
 import { API_URL } from "../../helper";
 import { getAddress, getAddressActions } from "../../Redux/Actions/addressActions";
-import { getProvinceRajaOngkir, getProvinceActions2, getProvinceRajaOngkir2 } from "../../Redux/Actions/getProvinceActions";
+import { getProvinceRajaOngkir, getProvinceActions2 } from "../../Redux/Actions/getProvinceActions";
 import { getCityRajaOngkir, getCityActions2 } from "../../Redux/Actions/getCityActions";
 import { getCostRajaOngkir } from "../../Redux/Actions/getCostActions";
 import {
@@ -21,7 +21,6 @@ import {
     AccordionIcon,
     Select,
     Tooltip,
-    Button
 } from "@chakra-ui/react";
 
 import { FaEdit } from "react-icons/fa";
@@ -33,11 +32,9 @@ const AccorAddressComponent = (props) => {
     //* assign function
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const { state, search } = useLocation();
 
     //& component did mount
     useEffect(() => {
-        //❗❗❗ fungsi untuk get province dan city dr rajaongkir biar bisa edit alamat & create alamat baru
         dispatch(getAddress())
         dispatch(getProvinceRajaOngkir())
         getProvinceRajaOngkir2()
@@ -60,22 +57,7 @@ const AccorAddressComponent = (props) => {
     const [accordionIndex, setAccordionIndex] = useState(null);
     const [idCityForOngkir, setIdCityForOngkir] = useState(null);
 
-    //TODO ❗❗❗ ambil dari reducer address
     const { address, phone, idUser, name, token, getProvince, getProvince2, getCity, getCity2, getCost, getCost2 } = useSelector((state) => {
-
-        // return {
-        //     address: state.addressReducers.address,
-        //     phone: state.userReducers.phone,
-        //     idUser: state.userReducers.idUser,
-        //     name: state.userReducers.name,
-        //     token: state.userReducers.token,
-        //     getProvince: state.getProvinceReducers.getProvince,
-        //     getProvince2: state.getProvinceReducers.getProvince2,
-        //     getCity: state.getCityReducers.getCity,
-        //     getCity2: state.getCityReducers.getCity2,
-        //     getCost: state.getCostReducers.getCost,
-        //     getCost2: state.getCostReducers.getCost2,
-        // }
 
         if (accordionIndex != null && idCityForOngkir > 0) {
             return {
@@ -106,37 +88,6 @@ const AccorAddressComponent = (props) => {
         }
 
     });
-
-    const [dbAddress, setDbAddress] = useState([
-        {
-            idAddress: 1,
-            idUser: 6, // pas ada keeplogin ini bisa didelete
-            receiverName: "Margareth Devina",
-            receiverPhone: "081287908000",
-            address: "Jl. Aster VI No. 7",
-            province: "Jawa Barat",
-            idProvince: 9,
-            city: "Bogor",
-            idCity: 79,
-            postalCode: "16134",
-            isDefaultAddress: "true",
-            label: "rumah",
-        },
-        {
-            idAddress: 2,
-            idUser: 6,
-            receiverName: "Margareth",
-            receiverPhone: "081287908001",
-            address: "Jl. Tanjung Badai",
-            province: "Jakarta",
-            idProvince: 6,
-            city: "Jakarta Pusat",
-            idCity: 152,
-            postalCode: "10540",
-            isDefaultAddress: "false",
-            label: "kantor",
-        }
-    ]);
 
     //& untuk print list address per user, kalau user decide edit salah 1 address, input forms diprint di sini jg
     const printAddress = () => {
@@ -385,7 +336,7 @@ const AccorAddressComponent = (props) => {
 
     //& onClick akan buka input forms untuk edit salah 1 alamat yg dipilih
     const btnEditAddress = (idAddress) => {
-        console.log(`idAddress yg akan diedit ${idAddress}`);
+        // console.log(`idAddress yg akan diedit ${idAddress}`);
         setEditedIdAddress(idAddress);
         setIsAccordionDisabled(!isAccordionDisabled);
         props.handleSendingToParentEditedAddress(idAddress);
@@ -393,7 +344,7 @@ const AccorAddressComponent = (props) => {
 
     //& onClick accordion lain akan kasih notif kalau alamat yg diedit/ditambah belum disave dulu, kalau ga ada yg pending disave editan/alamat tambahannya, otomatis accordion alamat yg dipilih akan masuk setState dan detilnya muncul 
     const btnEachAcordion = (idAddress, address, idProvince, idCity, receiverName, receiverPhone, label, indexAddress) => {
-        console.log(`idAddress yg akan diselect ${idAddress}`);
+        // console.log(`idAddress yg akan diselect ${idAddress}`);
 
         if (editedIdAddress) {
             newToast({
@@ -410,13 +361,11 @@ const AccorAddressComponent = (props) => {
         } else {
             setAccordionIndex(indexAddress);
 
-            //TODO ❗❗❗ get ongkir dr rajaongkir di sini ❗❗❗
             dispatch(getCostRajaOngkir(idCity));
 
             //* kirim info2 alamat terpilih ke Checkout Page
             if (getCost) {
                 setIdCityForOngkir(idCity);
-
             }
 
             if (idCityForOngkir == null) {
@@ -427,24 +376,18 @@ const AccorAddressComponent = (props) => {
                 props.handleSendingToParent(idAddress, address, idProvince, idCityForOngkir, receiverName, receiverPhone, label);
             }
 
-            // props.handleSendingToParent(idAddress, address, idProvince, idCity, receiverName, receiverPhone, label);
-            // else {
-            //     props.handleSendingToParent(idAddress, address, idProvince, idCity, receiverName, receiverPhone, label);
-            // }
         }
     }
 
-    //TODO ❗❗❗ province baru yang dipilih bakal select idProvince juga
     const handleProvince = (value) => {
-        console.log(`province baru ${value}`);
+        // console.log(`province baru ${value}`);
         setNewIdProvince(value);
     }
 
-    //TODO ❗❗❗ city baru yang dipilih bakal select idCity juga
     const handleCity = async (e) => {
         try {
-            console.log(`city baru ${e.target.value}`);
-            console.log(`newIdProvince`, newIdProvince);
+            // console.log(`city baru ${e.target.value}`);
+            // console.log(`newIdProvince`, newIdProvince);
 
             if (newIdProvince > 0) {
                 let a = newIdProvince
@@ -465,7 +408,7 @@ const AccorAddressComponent = (props) => {
 
     const handleCityName = async (e) => {
         try {
-            console.log(`newIdCity`, newIdCity);
+            // console.log(`newIdCity`, newIdCity);
             if (newIdCity > 0) {
                 { getCityRajaOngkir2() }
             } else {
@@ -478,16 +421,16 @@ const AccorAddressComponent = (props) => {
 
     const getProvinceRajaOngkir2 = async () => {
         try {
-            console.log(newIdProvince, 'newIdProvince');
+            // console.log(newIdProvince, 'newIdProvince');
             if (newIdProvince > 0) {
-                console.log('Province jalan');
+                // console.log('Province jalan');
                 let res = await Axios.get(`${API_URL}/rajaOngkir/getProvince2`, {
                     headers: {
                         provinceid: newIdProvince
                     }
                 })
                 if (res.data) {
-                    console.log("RES DATA GET PROVINCE RAJAONGKIR", res.data.namaProvinsi[0])
+                    // console.log("RES DATA GET PROVINCE RAJAONGKIR", res.data.namaProvinsi[0])
                     dispatch(getProvinceActions2(res.data.namaProvinsi[0]))
                 }
             }
@@ -498,9 +441,9 @@ const AccorAddressComponent = (props) => {
 
     const getCityRajaOngkir2 = async () => {
         try {
-            console.log("CITY_ID ACTIONS 2", newIdCity);
+            // console.log("CITY_ID ACTIONS 2", newIdCity);
             if (newIdCity > 0) {
-                console.log(`city2 jalan`);
+                // console.log(`city2 jalan`);
                 let res = await Axios.get(`${API_URL}/rajaOngkir/getCity2`, {
                     headers: {
                         provinceid: newIdProvince,
@@ -508,7 +451,7 @@ const AccorAddressComponent = (props) => {
                     }
                 })
                 if (res.data) {
-                    console.log("RES DATA GET CITY RAJAONGKIR", res.data.namaKota[0])
+                    // console.log("RES DATA GET CITY RAJAONGKIR", res.data.namaKota[0])
                     dispatch(getCityActions2(res.data.namaKota[0]))
                 }
             }
@@ -518,10 +461,9 @@ const AccorAddressComponent = (props) => {
     }
 
     //& onClick akan save address yg sudah diedit
-    //TODO ❗❗❗ untuk save address terupdate
     const btnSaveEdit = async (idAddress, currentLabel, isDefaultAddress) => {
-        console.log(`btnSaveEdit -- getProvince2 dan getCity2`, getProvince2, getCity2);
-        console.log(`btnSaveEdit -- newReceiverName, newReceiverPhone, newAddress, newPostalCode`, newReceiverName, newReceiverPhone, newAddress, newPostalCode);
+        // console.log(`btnSaveEdit -- getProvince2 dan getCity2`, getProvince2, getCity2);
+        // console.log(`btnSaveEdit -- newReceiverName, newReceiverPhone, newAddress, newPostalCode`, newReceiverName, newReceiverPhone, newAddress, newPostalCode);
         try {
             if (editedIdAddress) {
                 let token = localStorage.getItem('tokenIdUser');
@@ -544,7 +486,7 @@ const AccorAddressComponent = (props) => {
                     }
                 })
                 if (res.data) {
-                    console.log(`RES DATA EDIT PROFILE`, res.data);
+                    // console.log(`RES DATA EDIT PROFILE`, res.data);
                     dispatch(getAddressActions(res.data));
                     newToast({
                         title: 'Edit Alamat Berhasil.',
@@ -574,8 +516,8 @@ const AccorAddressComponent = (props) => {
 
     //& onClick akan save address baru yg dimasukkan
     const btnSaveNewAddress = async () => {
-        console.log(`getProvince2 dan getCity2`, getProvince2, getCity2);
-        console.log(`newReceiverName, newReceiverPhone, newAddress, newPostalCode, newLabel`, newReceiverName, newReceiverPhone, newAddress, newPostalCode, newLabel)
+        // console.log(`getProvince2 dan getCity2`, getProvince2, getCity2);
+        // console.log(`newReceiverName, newReceiverPhone, newAddress, newPostalCode, newLabel`, newReceiverName, newReceiverPhone, newAddress, newPostalCode, newLabel)
         try {
             if (newReceiverName == '' || newReceiverPhone == '' || newAddress == '' || getProvince2 == undefined || getCity2 == undefined || newPostalCode == '' || newLabel == '') {
                 newToast({
@@ -590,7 +532,7 @@ const AccorAddressComponent = (props) => {
                     status: 'error',
                 })
             } else {
-                console.log(`${newReceiverName},${newReceiverPhone},${newAddress},${newIdProvince},${newIdCity},${newPostalCode},${newLabel},${getProvince2}, ${getCity2}`);
+                // console.log(`${newReceiverName},${newReceiverPhone},${newAddress},${newIdProvince},${newIdCity},${newPostalCode},${newLabel},${getProvince2}, ${getCity2}`);
 
                 let token = localStorage.getItem('tokenIdUser');
                 let res = await Axios.post(`${API_URL}/address/addAddress`, {
@@ -612,14 +554,11 @@ const AccorAddressComponent = (props) => {
 
                 if (res.data) {
                     newToast({
-                        //   title: 'Tambah Alamat Berhasil.',
                         description: 'Tambah Alamat Berhasil',
                         status: 'success',
                     })
                     // console.log("res.data FE ADDRESS", res.data)
                     dispatch(getAddressActions(res.data))
-                    // setAddAddress(!addAddress)
-                    // setAddUtama(false)
                     props.handleSendingToParentNewAddress();
                     setAccordionIndex(null);
                 }

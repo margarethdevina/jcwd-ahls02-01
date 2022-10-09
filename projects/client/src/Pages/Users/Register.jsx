@@ -2,13 +2,10 @@ import Axios from "axios";
 import React from "react";
 import { API_URL } from "../../helper"
 import VectorRegister from "../../Assets/DevImage/Register.png";
-import logo from "../../Assets/DevImage/LogoMedhika.png";
 import NavbarComponent from "../../Components/Users/Navbar";
-import { Flex, Box, Heading, Spinner, Input, Image, Text, Divider, Spacer, ButtonGroup, Button, Link, extendTheme, InputGroup, InputLeftElement,
-  InputRightElement, Progress, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Popover,
-  PopoverTrigger, PopoverContent, PopoverHeader, PopoverArrow, PopoverCloseButton, PopoverBody, PopoverFooter, InputLeftAddon } from '@chakra-ui/react';
-// import { PhoneIcon } from '@chakra-ui/icons'
-import { BsTelephone } from 'react-icons/bs';
+import {  Box,  Spinner, Input, Image, Text, Button, InputGroup, 
+  InputRightElement, Progress, 
+  InputLeftAddon } from '@chakra-ui/react';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
@@ -36,11 +33,11 @@ const Register=()=>{
   const [loadingStat, setLoadingStat]=React.useState(false);
   const [currentToast, newToast]=useToastHook();
 
-  console.log("name", name)
-  console.log("Nomor Handphone", phone)
-  console.log("email", email)
-  console.log("password", password)
-  console.log("konfirmasi password", confirmPassword)
+  // console.log("name", name)
+  // console.log("Nomor Handphone", phone)
+  // console.log("email", email)
+  // console.log("password", password)
+  // console.log("konfirmasi password", confirmPassword)
 
   const [inForm, setInForm] = React.useState({
     email: '',
@@ -50,11 +47,9 @@ const Register=()=>{
 
   const handleRegister =async()=>{
     try {
-      // setDisable(!disable)
       setLoadingStat(true)
       checkStrongPassword();
       if (name=="" || phone=="" || email=="" || password=="" || confirmPassword==""){
-        // alert("Fill in all form")
         newToast({
           title: 'Registrasi Tidak Berhasil.',
           description: 'Mohon isi semua data registrasi',
@@ -86,15 +81,15 @@ const Register=()=>{
             profilePicture: "/Profile/PROFILE-PICTURE-USERBARU.jpg",
             isVerified:"unverified"
           })
-          console.log("res.data registerUser", res.data)
+          // console.log("res.data registerUser", res.data)
           if (res.data.token) {
             newToast({
               title: 'Registrasi Berhasil.',
               description: 'Verifikasi akun melalui link yang dikirim ke email anda',
               status: 'success',
             })
-            console.log("res.data FE", res.data)
-            console.log("res.data.token FE", res.data.token)
+            // console.log("res.data FE", res.data)
+            // console.log("res.data.token FE", res.data.token)
             localStorage.setItem("tokenIdUser", res.data.token)
             dispatch(loginAction(res.data))
             setLoadingStat(false)
@@ -119,8 +114,8 @@ const Register=()=>{
   }
   }
   
-  console.log("check negesi", !inForm.password.match(/^(?=.*[A-Z])/) == true)
-  console.log("check normal", inForm.password.match(/^(?=.*[A-Z])/) == true)
+  // console.log("check negesi", !inForm.password.match(/^(?=.*[A-Z])/) == true)
+  // console.log("check normal", inForm.password.match(/^(?=.*[A-Z])/) == true)
   const handleInput = (value, property) => {
     setInForm({ ...inForm, [property]: value})
     checkUpperCase();
@@ -151,7 +146,7 @@ const Register=()=>{
   }
 
   const checkStrongPassword =()=>{
-    console.log(isUpperCase, containsNumbers, passwordLength)
+    // console.log(isUpperCase, containsNumbers, passwordLength)
     if(passwordLength== false || isUpperCase==false ||
       containsNumbers==false ){
         newToast({
@@ -197,7 +192,6 @@ const checkNumbers=()=>{
         <Text class="h4">agar memudahkan saat transaksi obat</Text>
       </div>
       <div class="row mt-5">
-        {/* <div class="col-md-1"></div> */}
         <div class="col-md-6">      
           <Image src={VectorRegister} width='75%' style={{marginLeft:"40px"}}/>
         </div>

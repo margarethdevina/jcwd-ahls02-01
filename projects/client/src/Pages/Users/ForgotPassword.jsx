@@ -3,12 +3,9 @@ import React from "react";
 import { API_URL } from "../../helper";
 import { useDispatch } from 'react-redux'
 import { useNavigate, useParams } from "react-router-dom";
-import { useDisclosure, useToast } from '@chakra-ui/react';
-import { Flex, Box, Heading, Input, Image, Text, Divider, Spacer, Spinner, ButtonGroup, Button, Link, extendTheme, InputGroup, InputLeftElement,
-  InputRightElement, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Popover,
-  PopoverTrigger, PopoverContent, PopoverHeader, PopoverArrow, PopoverCloseButton, PopoverBody, PopoverFooter } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
+import { Box, Input, Image, Text, Spinner, Button } from '@chakra-ui/react';
 import VectorForgot from "../../Assets/DevImage/Forgot.png"
-import { loginAction } from "../../Redux/Actions/userActions";
 import NavbarComponent from "../../Components/Users/Navbar";
 import { useToastHook } from "../../Components/CustomToast";
 
@@ -34,15 +31,14 @@ const ForgotPassword=(props)=>{
         })
         setLoadingStat(false)
       }else{
-        console.log("emailfor", emailForgot)
+        // console.log("emailfor", emailForgot)
       let res = await Axios.post(`${API_URL}/users/forgot`, {
         email: emailForgot
       })
       // console.log("res", res)
       if (res.data) {
-        console.log("res.data forgotPassword", res.data)
+        // console.log("res.data forgotPassword", res.data)
         localStorage.setItem("tokenIdUser", res.data.token)
-        // dispatch(loginAction(res.data))
         newToast({
           title: 'Lupa Password Berhasil.',
           description: 'Masukkan password baru melalui link yang dikirim ke email anda',
@@ -60,7 +56,7 @@ const ForgotPassword=(props)=>{
       setLoadingStat(false)
     }
   }
-console.log(emailForgot)
+// console.log(emailForgot)
 
   return( <>
   <Box

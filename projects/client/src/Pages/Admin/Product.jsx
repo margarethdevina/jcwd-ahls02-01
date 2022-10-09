@@ -4,35 +4,19 @@ import { API_URL, BE_URL } from "../../helper";
 import {
   Text,
   useMediaQuery,
-  Image,
-  IconButton,
-  Flex,
-  Box,
   Table,
   TableContainer,
   Tr,
   Th,
   Td,
-  TableCaption,
   Thead,
   Tbody,
   Button,
   Modal,
-  ModalContent,
-  ModalFooter,
-  ModalBody,
-  ModalHeader,
-  Input,
-  FormControl,
-  FormLabel,
-  Select,
-  Textarea,
 } from "@chakra-ui/react";
 import "../../Styles/Admin/Product.css";
 import Sidebar from "../../Components/Admin/Sidebar";
 import { ModalCreate,ModalEdit } from "../../Components/Admin/ModalProducts";
-
-
 
 const Productpage = () => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
@@ -69,12 +53,10 @@ const Productpage = () => {
                   <Td>{value.productName}</Td>
                   <Td>{value.priceSale}</Td>
                   <Td>{value.categoryName}</Td>
-                  {/* <Td style={{ width: "50px" }}>{value.description}</Td> */}
                   <Td>
                     <img src={BE_URL + value.productPicture}></img>
                   </Td>
                   <Td>{value.defaultUnit}</Td>
-                  {/* <Td>{value.composition}</Td> */}
                   <Td>{value.convertedQuantity}</Td>
                   <Td>{value.stockQuantity}</Td>
                   <Td>
@@ -129,7 +111,7 @@ const Productpage = () => {
       })
       .then((res) => {
         setproductData(res.data.data);
-        console.log(res.data);
+        // console.log(res.data);
       });
   }
 

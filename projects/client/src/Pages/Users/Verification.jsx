@@ -2,9 +2,7 @@ import Axios from "axios";
 import React from "react";
 import { API_URL } from "../../helper";
 import { useDispatch, useSelector } from 'react-redux';
-import { useDisclosure, useToast } from '@chakra-ui/react';
-// import { loginAction } from "../redux/action/usersAction";
-// import { getPostings } from "../redux/action/postingsAction";
+import { useToast } from '@chakra-ui/react';
 import { useNavigate, useParams } from "react-router-dom";
 import { BsFillPersonCheckFill } from 'react-icons/bs';
 import { IoIosWarning } from "react-icons/io";
@@ -39,8 +37,8 @@ const Verification=(props)=>{
       getTokens();
   }, []);
 
-  console.log("params",params.token);
-  console.log("isVerified", isVerified);
+  // console.log("params",params.token);
+  // console.log("isVerified", isVerified);
 
   const handleVerified =async()=>{
     try {
@@ -51,9 +49,8 @@ const Verification=(props)=>{
             'Authorization': `Bearer ${params.token}`
           }
         })
-        console.log("RES.DATA.TOKEN verified", res.data.token)
+        // console.log("RES.DATA.TOKEN verified", res.data.token)
         if (res.data.token) {
-          //
           localStorage.setItem("tokenIdUser", res.data.token)
           dispatch(loginAction(res.data))
           newToast({
@@ -75,11 +72,11 @@ const Verification=(props)=>{
     }
   }
 
-  console.log("blacklist",blacklist);
+  // console.log("blacklist",blacklist);
   const getTokens= async ()=>{
     try {
-      console.log("getTokens jalan");
-      console.log("params",params.token);
+      // console.log("getTokens jalan");
+      // console.log("params",params.token);
       if (params.token) {
         let res = await Axios.post(`${API_URL}/users/getTokens`, {
           token: params.token
@@ -89,9 +86,8 @@ const Verification=(props)=>{
           }
         })
         // memeriksa adanya data user atau tidak
-        console.log("RES.DATA.TOKEN verified", res.data)
+        // console.log("RES.DATA.TOKEN verified", res.data)
         if (res.data.message == "token valid") {
-          //
           setBlacklist(true)
         } else {
           setBlacklist(false)
@@ -199,7 +195,6 @@ const Verification=(props)=>{
               }
               </div>
               <Text class="h5">Invalid Token</Text>
-              {/* onClick={() => navigate("/")} */}
               <Button class="btn-def_second mt-3 h5b" onClick={() => navigate("/")}>Close this page</Button>
             </div>
             <div class="col-md-4">

@@ -4,9 +4,8 @@ import { API_URL } from "../../helper";
 import { Button, Text, Box, Input, Progress, InputGroup, InputRightElement, Image, Spinner } from "@chakra-ui/react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
-import { IoIosWarning } from "react-icons/io";
-import { useDisclosure, useToast } from '@chakra-ui/react';
-import { loginAction, logoutAction } from "../../Redux/Actions/userActions";
+import { useToast } from '@chakra-ui/react';
+import { loginAction } from "../../Redux/Actions/userActions";
 import NavbarComponent from "../../Components/Users/Navbar";
 import { useToastHook } from "../../Components/CustomToast";
 import VectorChangePassword from "../../Assets/DevImage/Reset.png"
@@ -35,13 +34,12 @@ const ChangePassword=(props)=>{
       }
     })
 
-  console.log("password", oldPassword)
-  console.log("password", newPassword)
-  console.log("konfirmasi password", confirmPassword)
-  console.log("token reset", token)
-  console.log("params",params.token);
-  console.log("BOOLEAN TOKEN params",token == params.token);
-
+  // console.log("password", oldPassword)
+  // console.log("password", newPassword)
+  // console.log("konfirmasi password", confirmPassword)
+  // console.log("token reset", token)
+  // console.log("params",params.token);
+  // console.log("BOOLEAN TOKEN params",token == params.token);
 
   const [inForm, setInForm] = React.useState({
     oldPassword: '',
@@ -131,7 +129,7 @@ const ChangePassword=(props)=>{
   }
 
   const checkStrongPassword =()=>{
-    console.log(isUpperCase, containsNumbers, passwordLength)
+    // console.log(isUpperCase, containsNumbers, passwordLength)
     if(passwordLength== false || isUpperCase==false ||
       containsNumbers==false ){
         newToast({

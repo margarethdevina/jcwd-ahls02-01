@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-// import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getCartAction } from "../../Redux/Actions/cartActions";
 import { getAllMainStockAction } from "../../Redux/Actions/cartActions";
 import { API_URL, BE_URL } from "../../helper";
@@ -32,7 +31,6 @@ import {
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineMinusSquare } from "react-icons/ai";
 import { AiOutlinePlusSquare } from "react-icons/ai";
-import { IoConstructOutline } from "react-icons/io5";
 
 const CartItemComponent = (props) => {
 
@@ -68,7 +66,7 @@ const CartItemComponent = (props) => {
     })
 
     //^ check isi databaseCart
-    console.log(`dbMainStock`, dbMainStock);
+    // console.log(`dbMainStock`, dbMainStock);
 
     //& supaya qty bisa diinput manual jg
     const handleQty = (e, idCart, idStock) => {
@@ -79,12 +77,12 @@ const CartItemComponent = (props) => {
         //^ cari idProduct untuk di transfer ke BE in case product list ga return idStock
         let selectedIdProduct = dbMainStock.filter(val => val.idStock == idStock)[0];
         selectedIdProduct = selectedIdProduct.idProduct;
-        console.log(`selectedIdProduct`, selectedIdProduct);
+        // console.log(`selectedIdProduct`, selectedIdProduct);
 
         let token = localStorage.getItem("tokenIdUser");
 
         //^ cek ada token atau tidak
-        console.log(`handleQty tokenIdUser`, token);
+        // console.log(`handleQty tokenIdUser`, token);
 
         if (token) {
             Axios.patch(`${API_URL}/cart/${idCart}`, {
@@ -95,7 +93,7 @@ const CartItemComponent = (props) => {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res) => {
-                console.log("isi res.data pas onChange quantity", res.data);
+                // console.log("isi res.data pas onChange quantity", res.data);
                 dispatch(getCartAction());
                 handleToParent();
             }).catch((err) => {
@@ -112,7 +110,7 @@ const CartItemComponent = (props) => {
         setIdStockDeleted(idStock);
         setOpenModalPenghapusan(!openModalPenghapusan);
 
-        console.log(`btnDeleteItem diklik`)
+        // console.log(`btnDeleteItem diklik`)
 
     }
 
@@ -121,12 +119,12 @@ const CartItemComponent = (props) => {
         //^ cari idProduct untuk di transfer ke BE in case product list ga return idStock
         let selectedIdProduct = dbMainStock.filter(val => val.idStock == idStockDeleted)[0];
         selectedIdProduct = selectedIdProduct.idProduct;
-        console.log(`selectedIdProduct`, selectedIdProduct);
+        // console.log(`selectedIdProduct`, selectedIdProduct);
 
         let token = localStorage.getItem("tokenIdUser");
 
         //^ cek ada token atau tidak
-        console.log(`handleQty tokenIdUser`, token);
+        // console.log(`handleQty tokenIdUser`, token);
 
         if (token) {
             Axios.patch(`${API_URL}/cart/delete/${idCartDeleted}`, {
@@ -137,7 +135,7 @@ const CartItemComponent = (props) => {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res) => {
-                console.log("isi res.data pas delete diklik", res.data);
+                // console.log("isi res.data pas delete diklik", res.data);
                 dispatch(getCartAction());
                 setOpenModalPenghapusan(!openModalPenghapusan);
                 newToast({
@@ -162,12 +160,12 @@ const CartItemComponent = (props) => {
 
     //& onClick akan kurangi jumlah unit per item
     const btnDecreaseQuantity = (currentQty, idCart, idStock) => {
-        console.log(`btnDecreaseQuantity diklik`)
+        // console.log(`btnDecreaseQuantity diklik`)
 
         let temp = currentQty;
         if (temp > 1) {
             temp--;
-            console.log(`new cartQuantity`, temp);
+            // console.log(`new cartQuantity`, temp);
         } else {
             newToast({
                 title: "Jumlah minimal",
@@ -181,17 +179,17 @@ const CartItemComponent = (props) => {
             setOpenModalPenghapusan(!openModalPenghapusan);
             handleToParent();
         }
-        console.log(`new cartQuantity`, temp);
+        // console.log(`new cartQuantity`, temp);
 
         //^ cari idProduct untuk di transfer ke BE in case product list ga return idStock
         let selectedIdProduct = dbMainStock.filter(val => val.idStock == idStock)[0];
         selectedIdProduct = selectedIdProduct.idProduct;
-        console.log(`selectedIdProduct`, selectedIdProduct);
+        // console.log(`selectedIdProduct`, selectedIdProduct);
 
         let token = localStorage.getItem("tokenIdUser");
 
         //^ cek ada token atau tidak
-        console.log(`handleQty tokenIdUser`, token);
+        // console.log(`handleQty tokenIdUser`, token);
 
         if (token) {
             Axios.patch(`${API_URL}/cart/${idCart}`, {
@@ -202,7 +200,7 @@ const CartItemComponent = (props) => {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res) => {
-                console.log("isi res.data pas decrease quantity", res.data);
+                // console.log("isi res.data pas decrease quantity", res.data);
                 dispatch(getCartAction());
             }).catch((err) => {
                 console.log(err)
@@ -213,18 +211,18 @@ const CartItemComponent = (props) => {
 
     //& onClick akan tambah jumlah unit per item
     const btnIncreaseQuantity = (currentQty, idCart, idStock) => {
-        console.log(`btnIncreaseQuantity diklik`)
+        // console.log(`btnIncreaseQuantity diklik`)
 
         //^ untuk buat proteksi
         let quantityMax = dbMainStock.filter(val => val.idStock == idStock)[0];
         quantityMax = quantityMax.stockQuantity;
-        console.log(`quantityMax`, quantityMax);
+        // console.log(`quantityMax`, quantityMax);
 
         //^ proteksi saat tambah kuantiti per item
         let temp = currentQty;
         if (temp < quantityMax) {
             temp++;
-            console.log(`new cartQuantity`, temp);
+            // console.log(`new cartQuantity`, temp);
         } else {
             newToast({
                 title: "Jumlah maksimal",
@@ -236,7 +234,7 @@ const CartItemComponent = (props) => {
         //^ cari idProduct untuk di transfer ke BE in case product list ga return idStock
         let selectedIdProduct = dbMainStock.filter(val => val.idStock == idStock)[0];
         selectedIdProduct = selectedIdProduct.idProduct;
-        console.log(`selectedIdProduct`, selectedIdProduct);
+        // console.log(`selectedIdProduct`, selectedIdProduct);
 
         //^ untuk hitung ulang subTotal saat ada request increase kuantiti
         let tempSubTotal = 0;
@@ -244,7 +242,7 @@ const CartItemComponent = (props) => {
         let token = localStorage.getItem("tokenIdUser");
 
         //^ cek ada token atau tidak
-        console.log(`handleQty tokenIdUser`, token);
+        // console.log(`handleQty tokenIdUser`, token);
 
         if (token) {
             Axios.patch(`${API_URL}/cart/${idCart}`, {
@@ -255,7 +253,7 @@ const CartItemComponent = (props) => {
                     'Authorization': `Bearer ${token}`
                 }
             }).then((res) => {
-                console.log("isi res.data pas increase quantity", res.data);
+                // console.log("isi res.data pas increase quantity", res.data);
                 dispatch(getCartAction());
                 handleToParent();
 
@@ -271,12 +269,12 @@ const CartItemComponent = (props) => {
         let tempSubTotal = 0;
 
         if (!checkedCartIds) {
-            console.log(`checkedCartIds di cartItem comp ${checkedCartIds}`);
-            console.log(`typeof checkedCartIds di cartItem comp ${typeof (checkedCartIds)}`);
+            // console.log(`checkedCartIds di cartItem comp ${checkedCartIds}`);
+            // console.log(`typeof checkedCartIds di cartItem comp ${typeof (checkedCartIds)}`);
             props.handleCallback(0, []);
         } else {
-            console.log(`checkedCartIds di cartItem comp ${checkedCartIds}`);
-            console.log(`typeof checkedCartIds di cartItem comp ${typeof (checkedCartIds)}`);
+            // console.log(`checkedCartIds di cartItem comp ${checkedCartIds}`);
+            // console.log(`typeof checkedCartIds di cartItem comp ${typeof (checkedCartIds)}`);
             props.dbCart.map((valueCart, indexCart) => {
                 checkedCartIds.forEach((valueId, indexId) => {
                     if (valueCart.idCart == valueId) {
